@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linux常用工具命令 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="技巧 查询所有/root/下的空文件夹 1 find /root -type d -empty find命令使用多个条件 find可以多个条件一起用 用 -o或者 ! 符都可以连接下一个条件，!意思" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/linux_tool/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Linux常用工具命令" />
+<meta property="og:description" content="技巧 查询所有/root/下的空文件夹 1 find /root -type d -empty find命令使用多个条件 find可以多个条件一起用 用 -o或者 ! 符都可以连接下一个条件，!意思" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux_tool/" />
+<meta property="article:published_time" content="2020-04-29T14:30:13+08:00" />
+<meta property="article:modified_time" content="2020-04-29T14:30:13+08:00" />
+<meta itemprop="name" content="Linux常用工具命令">
+<meta itemprop="description" content="技巧 查询所有/root/下的空文件夹 1 find /root -type d -empty find命令使用多个条件 find可以多个条件一起用 用 -o或者 ! 符都可以连接下一个条件，!意思">
+<meta itemprop="datePublished" content="2020-04-29T14:30:13&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-29T14:30:13&#43;08:00" />
+<meta itemprop="wordCount" content="1667">
+
+
+
+<meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux常用工具命令"/>
+<meta name="twitter:description" content="技巧 查询所有/root/下的空文件夹 1 find /root -type d -empty find命令使用多个条件 find可以多个条件一起用 用 -o或者 ! 符都可以连接下一个条件，!意思"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux常用工具命令</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-29 </span>
+        
+          <span class="more-meta"> 约 1667 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#技巧">技巧</a>
+      <ul>
+        <li><a href="#查询所有root下的空文件夹">查询所有/root/下的空文件夹</a></li>
+        <li><a href="#find命令使用多个条件">find命令使用多个条件</a></li>
+        <li><a href="#shell数组中和的区别">shell数组中@和*的区别</a></li>
+        <li><a href="#取得脚本路径">取得脚本路径</a></li>
+        <li><a href="#shell中的数组和空格分割的字符串">shell中的数组和空格分割的字符串</a></li>
+        <li><a href="#shell单例">shell单例</a></li>
+        <li><a href="#ubuntu-1804使用vnc">Ubuntu 18.04使用vnc</a>
+          <ul>
+            <li><a href="#参考">参考:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#工具">工具</a>
+      <ul>
+        <li><a href="#网络配置">网络配置</a>
+          <ul>
+            <li><a href="#参考-1">参考:</a></li>
+          </ul>
+        </li>
+        <li><a href="#iptables">iptables</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#其它参数">其它参数：</a></li>
+                <li><a href="#ps">ps：</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#tcpdump">tcpdump</a>
+          <ul>
+            <li><a href="#参考-2">参考:</a></li>
+          </ul>
+        </li>
+        <li><a href="#docker">docker</a></li>
+        <li><a href="#top">top</a></li>
+        <li><a href="#nmap">nmap</a>
+          <ul>
+            <li><a href="#参考-3">参考:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="技巧">技巧</h1>
+<h2 id="查询所有root下的空文件夹">查询所有/root/下的空文件夹</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">find /root -type d -empty  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="find命令使用多个条件">find命令使用多个条件</h2>
+<p>find可以多个条件一起用 用 -o或者 ! 符都可以连接下一个条件，!意思为非， 下面的例子是找出目录中.c和.h的所有文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">find dir -name <span class="s1">&#39;*.c&#39;</span> -o -name <span class="s1">&#39;*.h&#39;</span> ! -type d
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="shell数组中和的区别">shell数组中@和*的区别</h2>
+<p>使用*号在有双引号的情况下，会被当作字符串，没有双引号效果一样</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">arr</span><span class="o">=(</span><span class="m">1</span> <span class="m">2</span> <span class="s1">&#39;a&#39;</span> b<span class="o">)</span>
+
+<span class="k">for</span> i in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">arr</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&#34;</span>
+<span class="k">do</span> 
+    <span class="nb">echo</span> <span class="si">${</span><span class="nv">i</span><span class="si">}</span>
+<span class="k">done</span>
+
+<span class="k">for</span> i in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">arr</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span>
+<span class="k">do</span> 
+    <span class="nb">echo</span> <span class="si">${</span><span class="nv">i</span><span class="si">}</span>
+<span class="k">done</span>
+
+输出：
+<span class="m">1</span> <span class="m">2</span> a b
+<span class="m">1</span>
+<span class="m">2</span>
+a
+b
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="取得脚本路径">取得脚本路径</h2>
+<p>返回带全路径的文件路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">FILEPATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>readlink -f <span class="nv">$0</span><span class="k">)</span><span class="s2">&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>取脚本所在目录路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">BASEDIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>dirname <span class="k">$(</span>readlink -f <span class="nv">$0</span><span class="k">))</span><span class="s2">&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="shell中的数组和空格分割的字符串">shell中的数组和空格分割的字符串</h2>
+<p>两者很相似，从命令行获得的是普通的空格分割的字符串要把这种字符串转为数组可以使用 (字符串) 的方式<!-- raw HTML omitted -->要把数组转为字符串可以使用 ${数组[@]} 的方式<!-- raw HTML omitted --></p>
+<h2 id="shell单例">shell单例</h2>
+<p>使用flock命令来实现对shell脚本的单例，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">flock -xn /tmp/test.lock -c <span class="s1">&#39;/bin/sh /tmp/test.sh&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>也可以在shell脚本中使用flock实现单例，如下：<!-- raw HTML omitted --></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 放在shell脚本头</span>
+<span class="nb">exec</span> 200&gt;/tmp/<span class="k">$(</span>basename <span class="nv">$0</span><span class="k">)</span>.lock
+flock -n <span class="m">200</span> <span class="o">||</span> <span class="nb">exit</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="ubuntu-1804使用vnc">Ubuntu 18.04使用vnc</h2>
+<p>除了参考文章上说的步骤， 执行vncserver时还要加一个参数 <code>-localhost no</code>  ，不然只能本地访问</p>
+<h3 id="参考">参考:</h3>
+<p><a href="https://www.cyberciti.biz/faq/install-and-configure-tigervnc-server-on-ubuntu-18-04/">https://www.cyberciti.biz/faq/install-and-configure-tigervnc-server-on-ubuntu-18-04/</a></p>
+<h1 id="工具">工具</h1>
+<h2 id="网络配置">网络配置</h2>
+<p>一般使用ip、ifconfig、route来配置网络，而ifconfig所在的net-tools已经多年没人维护，所以更推荐使用ip命令完成配置工作。<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->查看网络配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ip a
+ip addr
+ip a show ech0
+
+ifconfig
+ifconfig ech0
+
+</code></pre></td></tr></table>
+</div>
+</div><p><!-- raw HTML omitted -->设置IP</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ip addr add 192.168.11.11/24 dev ens33
+
+ifconfig ens33 192.168.11.11/24
+ifconfig ens33:1 192.168.11.11/24
+</code></pre></td></tr></table>
+</div>
+</div><p>要注意的是使用ip addr来添加ip，如果原来网口有一个ip，会新增一个ip相当于ifconfig的ens33:1。怎样使用ip addr来替换原来的ip还没找到。<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->查看路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">route -n
+
+ip route
+</code></pre></td></tr></table>
+</div>
+</div><p><!-- raw HTML omitted -->设置默认路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ip route add default via 172.16.110.110 dev ens33
+ip route del default via 172.16.110.110 dev ens33
+
+route add default gw 172.16.110.111 dev ens33
+route del default gw 172.16.110.111 dev ens33
+</code></pre></td></tr></table>
+</div>
+</div><p>对特定ip设置路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">route add -net 110.110.110.0 netmask 255.255.255.0 gw 172.16.110.111 dev ens33
+route add -net 110.110.110.0/24 gw 172.16.110.111 dev ens33
+
+ip route add 110.110.110.0/24 via 172.16.110.111 dev ens33
+</code></pre></td></tr></table>
+</div>
+</div><p><!-- raw HTML omitted -->traceroute命令可以跟踪到达目的ip经过的路由ip</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">traceroute 114.114.114.114
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="参考-1">参考:</h3>
+<ul>
+<li><a href="https://10.linuxstory.net/replacing-ifconfig-with-ip/">https://10.linuxstory.net/replacing-ifconfig-with-ip/</a></li>
+<li><a href="http://www.361way.com/ifconfig-ip-ip/1835.html">http://www.361way.com/ifconfig-ip-ip/1835.html</a></li>
+<li><a href="https://www.cnblogs.com/anliven/p/6757358.html#_label1">https://www.cnblogs.com/anliven/p/6757358.html#_label1</a></li>
+</ul>
+<h2 id="iptables">iptables</h2>
+<p>iptables是一个链的方式从前往后判断，如果前面的规则成立就不会往后继续。参数“-A”是Append意思，也就是追加；参数“-I”是Insert意思，也就是插入；参数“-F”是Flush意思，表示清除（即删除）掉已有规则，也就是清空。<!-- raw HTML omitted -->“-j”参数后跟的是动作，即满足规则时执行的操作，可以为ACCEPT、DROP、REJECT和REDIRECT等<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->查看已有的规则<!-- raw HTML omitted --></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">iptables -L -n
+</code></pre></td></tr></table>
+</div>
+</div><p>-n 不使用常用服务名称来命名端口号<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->其它机器能访问本机80端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ACCEPT
+</code></pre></td></tr></table>
+</div>
+</div><p>-p 协议<!-- raw HTML omitted -->&ndash;dport 目标端口<!-- raw HTML omitted -->&ndash;sport 源端口<!-- raw HTML omitted -->-s源地址<!-- raw HTML omitted -->-d目的地址<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->删除INPUT第一条规则</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">#
+使用命令查看要删除的规则的行号
+iptables -n --line-number -L INPUT
+
+iptables -D INPUT <span class="m">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>&ndash;line-number 显示规则行号<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->清空INPUT表规则</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">iptables -F INPUT
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="其它参数">其它参数：</h4>
+<p>-v：显示详细信息<!-- raw HTML omitted -->-vv<!-- raw HTML omitted -->-vvv :越多越详细<!-- raw HTML omitted -->-x：在计数器上显示精确值，不做单位换算<!-- raw HTML omitted -->-t nat：显示所有的关卡的信息<!-- raw HTML omitted -->
+<!-- raw HTML omitted --></p>
+<h4 id="ps">ps：</h4>
+<ul>
+<li><a href="https://www.cnblogs.com/zclzhao/p/5081590.html">https://www.cnblogs.com/zclzhao/p/5081590.html</a></li>
+<li><a href="https://www.cnblogs.com/aquester/p/11024992.html">https://www.cnblogs.com/aquester/p/11024992.html</a></li>
+</ul>
+<h2 id="tcpdump">tcpdump</h2>
+<p>监听 ens33端口，打印数据内容源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">tcpdump -i ens33 -vnn -X tcp and src host 172.16.110.30 and dst host www.baidu.com and dst port <span class="m">443</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>-i 网口<!-- raw HTML omitted -->-vnn  -v是详细的意思 还可以 -vv， nn是直接显示端口不不显示服务名<!-- raw HTML omitted -->tcp tcp协议 <!-- raw HTML omitted -->-X 显示数据<!-- raw HTML omitted -->-w /tmp/xxx.cap  把结果存到文件，可以直接放到wireshark做分析<!-- raw HTML omitted -->
+<!-- raw HTML omitted --></p>
+<h3 id="参考-2">参考:</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/aquester/p/11024992.html">https://www.cnblogs.com/aquester/p/11024992.html</a></li>
+<li><a href="https://blog.51cto.com/masters/1870141">https://blog.51cto.com/masters/1870141</a></li>
+<li><a href="https://www.cnblogs.com/gaoyuechen/p/8249590.html">https://www.cnblogs.com/gaoyuechen/p/8249590.html</a></li>
+</ul>
+<h2 id="docker">docker</h2>
+<p>待续&hellip;</p>
+<h2 id="top">top</h2>
+<p> 查看系统资源查看器，大写P按cpu占用排序，大写M按内存占用排序<!-- raw HTML omitted --></p>
+<h2 id="nmap">nmap</h2>
+<p>扫描目标设备的tcp端口<!-- raw HTML omitted --></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">nmap -T4  -sS 10.100.10.102
+</code></pre></td></tr></table>
+</div>
+</div><p>T0 =&gt; paranoid 慢速网络扫描，串行扫描，两次扫描间隔 5 分钟。扫描速度极慢。<br>
+T1 =&gt; Sneky 慢速网络扫描，串行扫描，两次扫描间隔 15 秒，扫描速度较慢。<br>
+T2 =&gt; Polite 中速网络扫描，串行扫描，两次扫描间隔 400 毫秒，扫描速度慢。<br>
+T3 =&gt; Normal 中速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度正常。<br>
+T4 =&gt; Aggressive 快速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度较快。<br>
+T5 =&gt; Normal 快速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度极快。<br>
+-sS 使用SYN＋ACK的方法，使用TCP SYN。
+-sT 使用TCP的方法， 完成3次握手。
+-sU 扫描UDP。
+-p 指定端口。
+-A  全面系统检测，扫描主机操作系统和所启用的服务。</p>
+<h3 id="参考-3">参考:</h3>
+<ul>
+<li><a href="https://www.linuxrumen.com/cyml/668.html">https://www.linuxrumen.com/cyml/668.html</a></li>
+<li><a href="http://blog.lujun9972.win/blog/2018/09/12/%E4%BD%BF%E7%94%A8nmap%E8%BF%9B%E8%A1%8C%E7%BD%91%E7%BB%9C%E5%8F%91%E7%8E%B0/index.html">http://blog.lujun9972.win/blog/2018/09/12/%E4%BD%BF%E7%94%A8nmap%E8%BF%9B%E8%A1%8C%E7%BD%91%E7%BB%9C%E5%8F%91%E7%8E%B0/index.html</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-29
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
