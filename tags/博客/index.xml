@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>博客 on hao的博客</title>
+    <link>http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2/</link>
+    <description>Recent content in 博客 on hao的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 29 Apr 2020 19:39:25 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用hugo&#43;github pages重建博客</title>
+      <link>http://localhost:1313/post/blog-move/</link>
+      <pubDate>Wed, 29 Apr 2020 19:39:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/blog-move/</guid>
+      <description>之前试过自己写过原生博客，也试过各种博客技术，现在不想折腾了。对比了一下，感觉hugo+github pages 这种方法最省心，最合心意。趁有空，就陆</description>
+    </item>
+    
+  </channel>
+</rss>
