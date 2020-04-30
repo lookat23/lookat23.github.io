@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>源码编译为deb包</title>
+      <link>http://localhost:1313/post/create_patch/</link>
+      <pubDate>Thu, 30 Apr 2020 15:18:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/create_patch/</guid>
+      <description>先说明该文章内容是在Linux系统的Debian流派下进行的，也就是使用dpkg和apt来管理包。 命令都没考虑权限问题，提示权限不够，自己加</description>
+    </item>
+    
+    <item>
       <title>使用hugo&#43;github pages重建博客</title>
       <link>http://localhost:1313/post/blog-move/</link>
       <pubDate>Wed, 29 Apr 2020 19:39:25 +0800</pubDate>

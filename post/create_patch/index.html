@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>源码编译为deb包 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="先说明该文章内容是在Linux系统的Debian流派下进行的，也就是使用dpkg和apt来管理包。 命令都没考虑权限问题，提示权限不够，自己加" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/create_patch/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="源码编译为deb包" />
+<meta property="og:description" content="先说明该文章内容是在Linux系统的Debian流派下进行的，也就是使用dpkg和apt来管理包。 命令都没考虑权限问题，提示权限不够，自己加" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/create_patch/" />
+<meta property="article:published_time" content="2020-04-30T15:18:07+08:00" />
+<meta property="article:modified_time" content="2020-04-30T15:18:07+08:00" />
+<meta itemprop="name" content="源码编译为deb包">
+<meta itemprop="description" content="先说明该文章内容是在Linux系统的Debian流派下进行的，也就是使用dpkg和apt来管理包。 命令都没考虑权限问题，提示权限不够，自己加">
+<meta itemprop="datePublished" content="2020-04-30T15:18:07&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-30T15:18:07&#43;08:00" />
+<meta itemprop="wordCount" content="1329">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="源码编译为deb包"/>
+<meta name="twitter:description" content="先说明该文章内容是在Linux系统的Debian流派下进行的，也就是使用dpkg和apt来管理包。 命令都没考虑权限问题，提示权限不够，自己加"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">源码编译为deb包</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-30 </span>
+        
+          <span class="more-meta"> 约 1329 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#下载源码">下载源码</a></li>
+    <li><a href="#安装依赖">安装依赖</a></li>
+    <li><a href="#修改源码并制作补丁">修改源码并制作补丁</a></li>
+    <li><a href="#编译并生成deb包">编译并生成deb包</a></li>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>先说明该文章内容是在Linux系统的Debian流派下进行的，也就是使用dpkg和apt来管理包。<br>
+命令都没考虑权限问题，提示权限不够，自己加sudo。</p>
+</blockquote>
+<p>平时在Linux安装软件，如果不追求新版本，一般都直接<code>apt-get install packagename</code>来进行
+安装。但有时需要对这个软件源码进行更改来实现某个特别的功能。这种时候一般情况，我会去官网下
+载源码然后修改代码后编译安装。这段时间发现了另外一种的方法，用起来会更简单，缺点就是软件
+版本只能使用源里面的版本。方法就是使用apt-get来下载源码包，下面说说这种方法。<br>
+apt-get除了直接安装软件，还可以下载源码包。 通过修改源码包再生成deb包，然后安装deb包就能
+很轻松实现修改代码并安装的需求，而且安装依赖和编译还是一个命令搞的定那种，非常方便。<br>
+下面开始一步一步的说明过程，我以安装samba为例。</p>
+<h1 id="下载源码">下载源码</h1>
+<p>要下载deb的源码包，首先要确保源列表中有<strong>deb-src</strong>的源列表项，这是下载deb源码包必须的，
+要注意有些源为了更新列表快速，会把<strong>deb-src</strong>的项注释掉。下面是网易源Debian8的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">deb http://mirrors.163.com/debian/ jessie main non-free contrib
+deb http://mirrors.163.com/debian-archive/debian/ jessie-backports main non-free contrib
+deb-src http://mirrors.163.com/debian/ jessie main non-free contrib
+deb-src http://mirrors.163.com/debian-archive/debian/ jessie-backports main non-free contrib
+deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib
+</code></pre></td></tr></table>
+</div>
+</div><p>添加好源后需要执行<code>apt-get update</code>来更新源数据到本地。更新成功后，如果知道软件名，那直接
+执行如下命令即可下载deb包：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-get source samba
+</code></pre></td></tr></table>
+</div>
+</div><p>如果不知道准确的包名，可以通过如下命令搜索源中都有哪些软件包，命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-cache search samba
+</code></pre></td></tr></table>
+</div>
+</div><p>这个命令可以列出所有包含<strong>samba</strong>字符串的软件包，配合<strong>grep</strong>做一下筛选效果更佳</p>
+<h1 id="安装依赖">安装依赖</h1>
+<p>apt的安装依赖这个是真的方便，以前我进行源码编译都是configure提示缺什么装什么，还要去找
+对应的包名，或者到处找文档这个源码编译都依赖啥。而使用deb源码包，只需下面一句命令就可以
+把需要的编译依赖全装上，命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-get build-dep samba
+</code></pre></td></tr></table>
+</div>
+</div><p>其实即使是直接下载官方源码进行编译，我觉得也可以先执行一下这个命令，依赖基本都能解决掉，
+剩下不行的再慢慢再装上这样会更简单。</p>
+<h1 id="修改源码并制作补丁">修改源码并制作补丁</h1>
+<p>如果只是想deb包源码编译而不修改源码，那可以直接看下一节。<br>
+创建补丁我用了一个命令<strong>quilt</strong>来帮助我完成，但这并不是唯一的方法，因为好明显这个命令也是
+封装了一些diff之类的方法来实现的，所以按道理用其它命令也能弄出补丁。<br>
+如果没有<strong>quilt</strong>命令的话，先用如下命令安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-get install quilt
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>quilt</strong>默认会使用源码目录下的<strong>debian/patchs</strong>作为补丁目录，可以通过设置<strong>QUILT_PATCHES</strong>
+环境变量来修改。<br>
+我们先使用命令把现有的补丁都打上，命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">quilt push -a
+</code></pre></td></tr></table>
+</div>
+</div><p>现在可以创建输入自己的补丁，先创建一个补丁文件，命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">quilt new 1_test.patch
+</code></pre></td></tr></table>
+</div>
+</div><p>创建补丁后，把需要修改的代码添加进<strong>quilt</strong>中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">quilt add xxx.c
+</code></pre></td></tr></table>
+</div>
+</div><p>然后对xxx.c进行需要的修改，刷新补丁记录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">quilt refresh
+</code></pre></td></tr></table>
+</div>
+</div><p>刷新后打开<strong>debian/patchs/1_test.patch</strong>文件就可以看到我们做的修改</p>
+<h1 id="编译并生成deb包">编译并生成deb包</h1>
+<p>上面的都弄好后，生成deb就简单了，直接下面的命令就可以完成编译到生成deb包的整套工作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">dpkg-buildpackage -rfakeroot -uc -us -b
+</code></pre></td></tr></table>
+</div>
+</div><p>命令成功执行后，deb包会在源码包的上一级目录中</p>
+<h1 id="安装">安装</h1>
+<p>转到deb包所在目录，使用下面命令全部安装即可：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">dpkg -i *.deb
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="参考">参考</h1>
+<ul>
+<li><a href="https://askubuntu.com/questions/28372/how-do-i-get-and-modify-the-source-code-of-packages-installed-through-apt-get">https://askubuntu.com/questions/28372/how-do-i-get-and-modify-the-source-code-of-packages-installed-through-apt-get</a></li>
+<li><a href="http://cs-people.bu.edu/doucette/xia/guides/debian-patch.txts">http://cs-people.bu.edu/doucette/xia/guides/debian-patch.txts</a></li>
+<li><a href="http://wen00072.github.io/blog/2014/06/08/study-on-the-quilt/">http://wen00072.github.io/blog/2014/06/08/study-on-the-quilt/</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/blog-move/">
+            <span class="next-text nav-default">使用hugo&#43;github pages重建博客</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
