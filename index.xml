@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>读后感：原则-生活篇</title>
+      <link>http://localhost:1313/post/principles1/</link>
+      <pubDate>Fri, 01 May 2020 19:39:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/principles1/</guid>
+      <description>原则是一本好书，很推荐阅读，不要只看网上原则条目的总结 这本书读下来有一种似曾相识的感觉，虽然内容完全不同，但读下来有种读《高效能人士的七个习</description>
+    </item>
+    
+    <item>
       <title>源码编译为deb包</title>
       <link>http://localhost:1313/post/create_patch/</link>
       <pubDate>Thu, 30 Apr 2020 15:18:07 +0800</pubDate>
