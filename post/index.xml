@@ -6,10 +6,19 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 May 2020 19:39:41 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2020 20:39:01 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>读后感：原则-工作篇</title>
+      <link>http://localhost:1313/post/principles2/</link>
+      <pubDate>Wed, 06 May 2020 20:39:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/principles2/</guid>
+      <description>读后感是我对书本的看法，并不一定完全是书本作者的表述 读完原则的生活章节后，开始阅读工作的章节。在写这篇文章时，工作篇是还没读完的。但为不忘记</description>
+    </item>
     
     <item>
       <title>读后感：原则-生活篇</title>

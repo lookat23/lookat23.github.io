@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>原则 on hao的博客</title>
+    <link>http://localhost:1313/tags/%E5%8E%9F%E5%88%99/</link>
+    <description>Recent content in 原则 on hao的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 06 May 2020 20:39:01 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%8E%9F%E5%88%99/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>读后感：原则-工作篇</title>
+      <link>http://localhost:1313/post/principles2/</link>
+      <pubDate>Wed, 06 May 2020 20:39:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/principles2/</guid>
+      <description>读后感是我对书本的看法，并不一定完全是书本作者的表述 读完原则的生活章节后，开始阅读工作的章节。在写这篇文章时，工作篇是还没读完的。但为不忘记</description>
+    </item>
+    
+    <item>
+      <title>读后感：原则-生活篇</title>
+      <link>http://localhost:1313/post/principles1/</link>
+      <pubDate>Fri, 01 May 2020 19:39:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/principles1/</guid>
+      <description>原则是一本好书，很推荐阅读，不要只看网上原则条目的总结 这本书读下来有一种似曾相识的感觉，虽然内容完全不同，但读下来有种读《高效能人士的七个习</description>
+    </item>
+    
+  </channel>
+</rss>
