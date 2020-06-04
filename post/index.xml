@@ -6,10 +6,19 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 06 May 2020 20:39:01 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2020 11:24:37 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python如何判断字符串是否是另一个字符串的子串</title>
+      <link>http://localhost:1313/post/check-string-exist-in-another-string/</link>
+      <pubDate>Thu, 04 Jun 2020 11:24:37 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/check-string-exist-in-another-string/</guid>
+      <description>这个问题已经写到了自己的项目中连接。 不过这次不是单纯搬stackoverflow的内容，也加了自己的内容，所以也贴到博客来做个记录吧。 sta</description>
+    </item>
     
     <item>
       <title>读后感：原则-工作篇</title>

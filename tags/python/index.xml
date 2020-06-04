@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on hao的博客</title>
+    <link>http://localhost:1313/tags/python/</link>
+    <description>Recent content in Python on hao的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 04 Jun 2020 11:24:37 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python如何判断字符串是否是另一个字符串的子串</title>
+      <link>http://localhost:1313/post/check-string-exist-in-another-string/</link>
+      <pubDate>Thu, 04 Jun 2020 11:24:37 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/check-string-exist-in-another-string/</guid>
+      <description>这个问题已经写到了自己的项目中连接。 不过这次不是单纯搬stackoverflow的内容，也加了自己的内容，所以也贴到博客来做个记录吧。 sta</description>
+    </item>
+    
+  </channel>
+</rss>
