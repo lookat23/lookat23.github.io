@@ -49,7 +49,7 @@
 <meta itemprop="description" content="技巧 查询所有/root/下的空文件夹 1 find /root -type d -empty find命令使用多个条件 find可以多个条件一起用 用 -o或者 ! 符都可以连接下一个条件，!意思">
 <meta itemprop="datePublished" content="2020-04-29T14:30:13&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-29T14:30:13&#43;08:00" />
-<meta itemprop="wordCount" content="1667">
+<meta itemprop="wordCount" content="1642">
 
 
 
@@ -127,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-04-29 </span>
         
-          <span class="more-meta"> 约 1667 字 </span>
+          <span class="more-meta"> 约 1642 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
@@ -273,7 +273,8 @@ b
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="shell中的数组和空格分割的字符串">shell中的数组和空格分割的字符串</h2>
-<p>两者很相似，从命令行获得的是普通的空格分割的字符串要把这种字符串转为数组可以使用 (字符串) 的方式<!-- raw HTML omitted -->要把数组转为字符串可以使用 ${数组[@]} 的方式<!-- raw HTML omitted --></p>
+<p>两者很相似，从命令行获得的是普通的空格分割的字符串要把这种字符串转为数组可以使用 (字符串) 的方式</p>
+<p>要把数组转为字符串可以使用 ${数组[@]} 的方式</p>
 <h2 id="shell单例">shell单例</h2>
 <p>使用flock命令来实现对shell脚本的单例，如下：</p>
 <div class="highlight"><div class="chroma">
@@ -284,7 +285,7 @@ b
 <pre class="chroma"><code class="language-bash" data-lang="bash">flock -xn /tmp/test.lock -c <span class="s1">&#39;/bin/sh /tmp/test.sh&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>也可以在shell脚本中使用flock实现单例，如下：<!-- raw HTML omitted --></p>
+</div><p>也可以在shell脚本中使用flock实现单例，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -303,8 +304,8 @@ flock -n <span class="m">200</span> <span class="o">||</span> <span class="nb">e
 <p><a href="https://www.cyberciti.biz/faq/install-and-configure-tigervnc-server-on-ubuntu-18-04/">https://www.cyberciti.biz/faq/install-and-configure-tigervnc-server-on-ubuntu-18-04/</a></p>
 <h1 id="工具">工具</h1>
 <h2 id="网络配置">网络配置</h2>
-<p>一般使用ip、ifconfig、route来配置网络，而ifconfig所在的net-tools已经多年没人维护，所以更推荐使用ip命令完成配置工作。<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->查看网络配置</p>
+<p>一般使用ip、ifconfig、route来配置网络，而ifconfig所在的net-tools已经多年没人维护，所以更推荐使用ip命令完成配置工作。</p>
+<p>查看网络配置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -325,7 +326,7 @@ ifconfig ech0
 
 </code></pre></td></tr></table>
 </div>
-</div><p><!-- raw HTML omitted -->设置IP</p>
+</div><p>设置IP：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -340,8 +341,8 @@ ifconfig ens33 192.168.11.11/24
 ifconfig ens33:1 192.168.11.11/24
 </code></pre></td></tr></table>
 </div>
-</div><p>要注意的是使用ip addr来添加ip，如果原来网口有一个ip，会新增一个ip相当于ifconfig的ens33:1。怎样使用ip addr来替换原来的ip还没找到。<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->查看路由</p>
+</div><p>要注意的是使用ip addr来添加ip，如果原来网口有一个ip，会新增一个ip相当于ifconfig的ens33:1。怎样使用ip addr来替换原来的ip还没找到。</p>
+<p>查看路由：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -354,7 +355,7 @@ ifconfig ens33:1 192.168.11.11/24
 ip route
 </code></pre></td></tr></table>
 </div>
-</div><p><!-- raw HTML omitted -->设置默认路由</p>
+</div><p>设置默认路由：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -371,7 +372,7 @@ route add default gw 172.16.110.111 dev ens33
 route del default gw 172.16.110.111 dev ens33
 </code></pre></td></tr></table>
 </div>
-</div><p>对特定ip设置路由</p>
+</div><p>对特定ip设置路由：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -386,7 +387,7 @@ route add -net 110.110.110.0/24 gw 172.16.110.111 dev ens33
 ip route add 110.110.110.0/24 via 172.16.110.111 dev ens33
 </code></pre></td></tr></table>
 </div>
-</div><p><!-- raw HTML omitted -->traceroute命令可以跟踪到达目的ip经过的路由ip</p>
+</div><p>traceroute命令可以跟踪到达目的ip经过的路由ip：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -402,8 +403,12 @@ ip route add 110.110.110.0/24 via 172.16.110.111 dev ens33
 <li><a href="https://www.cnblogs.com/anliven/p/6757358.html#_label1">https://www.cnblogs.com/anliven/p/6757358.html#_label1</a></li>
 </ul>
 <h2 id="iptables">iptables</h2>
-<p>iptables是一个链的方式从前往后判断，如果前面的规则成立就不会往后继续。参数“-A”是Append意思，也就是追加；参数“-I”是Insert意思，也就是插入；参数“-F”是Flush意思，表示清除（即删除）掉已有规则，也就是清空。<!-- raw HTML omitted -->“-j”参数后跟的是动作，即满足规则时执行的操作，可以为ACCEPT、DROP、REJECT和REDIRECT等<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->查看已有的规则<!-- raw HTML omitted --></p>
+<p>iptables是一个链的方式从前往后判断，如果前面的规则成立就不会往后继续。</p>
+<p>参数“-A”是Append意思，也就是追加；</p>
+<p>参数“-I”是Insert意思，也就是插入；</p>
+<p>参数“-F”是Flush意思，表示清除（即删除）掉已有规则，也就是清空。</p>
+<p>“-j”参数后跟的是动作，即满足规则时执行的操作，可以为ACCEPT、DROP、REJECT和REDIRECT等</p>
+<p>查看已有的规则：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -412,8 +417,8 @@ ip route add 110.110.110.0/24 via 172.16.110.111 dev ens33
 <pre class="chroma"><code class="language-bash" data-lang="bash">iptables -L -n
 </code></pre></td></tr></table>
 </div>
-</div><p>-n 不使用常用服务名称来命名端口号<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->其它机器能访问本机80端口</p>
+</div><p>-n 不使用常用服务名称来命名端口号</p>
+<p>其它机器能访问本机80端口：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -422,8 +427,12 @@ ip route add 110.110.110.0/24 via 172.16.110.111 dev ens33
 <pre class="chroma"><code class="language-bash" data-lang="bash">iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ACCEPT
 </code></pre></td></tr></table>
 </div>
-</div><p>-p 协议<!-- raw HTML omitted -->&ndash;dport 目标端口<!-- raw HTML omitted -->&ndash;sport 源端口<!-- raw HTML omitted -->-s源地址<!-- raw HTML omitted -->-d目的地址<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->删除INPUT第一条规则</p>
+</div><p>-p 协议</p>
+<p>&ndash;dport 目标端口</p>
+<p>&ndash;sport 源端口</p>
+<p>-s源地址</p>
+<p>-d目的地址</p>
+<p>删除INPUT第一条规则：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -440,8 +449,8 @@ iptables -n --line-number -L INPUT
 iptables -D INPUT <span class="m">1</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>&ndash;line-number 显示规则行号<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->清空INPUT表规则</p>
+</div><p>&ndash;line-number 显示规则行号</p>
+<p>清空INPUT表规则：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -451,15 +460,17 @@ iptables -D INPUT <span class="m">1</span>
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="其它参数">其它参数：</h4>
-<p>-v：显示详细信息<!-- raw HTML omitted -->-vv<!-- raw HTML omitted -->-vvv :越多越详细<!-- raw HTML omitted -->-x：在计数器上显示精确值，不做单位换算<!-- raw HTML omitted -->-t nat：显示所有的关卡的信息<!-- raw HTML omitted -->
-<!-- raw HTML omitted --></p>
+<p>-v：显示详细信息</p>
+<p>-vv -vvv :越多越详细</p>
+<p>-x：在计数器上显示精确值，不做单位换算</p>
+<p>-t nat：显示所有的关卡的信息</p>
 <h4 id="ps">ps：</h4>
 <ul>
 <li><a href="https://www.cnblogs.com/zclzhao/p/5081590.html">https://www.cnblogs.com/zclzhao/p/5081590.html</a></li>
 <li><a href="https://www.cnblogs.com/aquester/p/11024992.html">https://www.cnblogs.com/aquester/p/11024992.html</a></li>
 </ul>
 <h2 id="tcpdump">tcpdump</h2>
-<p>监听 ens33端口，打印数据内容源</p>
+<p>监听 ens33端口，打印数据内容源：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -468,8 +479,11 @@ iptables -D INPUT <span class="m">1</span>
 <pre class="chroma"><code class="language-bash" data-lang="bash">tcpdump -i ens33 -vnn -X tcp and src host 172.16.110.30 and dst host www.baidu.com and dst port <span class="m">443</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>-i 网口<!-- raw HTML omitted -->-vnn  -v是详细的意思 还可以 -vv， nn是直接显示端口不不显示服务名<!-- raw HTML omitted -->tcp tcp协议 <!-- raw HTML omitted -->-X 显示数据<!-- raw HTML omitted -->-w /tmp/xxx.cap  把结果存到文件，可以直接放到wireshark做分析<!-- raw HTML omitted -->
-<!-- raw HTML omitted --></p>
+</div><p>-i 网口</p>
+<p>-vnn  -v是详细的意思 还可以 -vv， nn是直接显示端口不不显示服务名</p>
+<p>tcp tcp协议</p>
+<p>-X 显示数据</p>
+<p>-w /tmp/xxx.cap  把结果存到文件，可以直接放到wireshark做分析</p>
 <h3 id="参考-2">参考:</h3>
 <ul>
 <li><a href="https://www.cnblogs.com/aquester/p/11024992.html">https://www.cnblogs.com/aquester/p/11024992.html</a></li>
@@ -479,9 +493,9 @@ iptables -D INPUT <span class="m">1</span>
 <h2 id="docker">docker</h2>
 <p>待续&hellip;</p>
 <h2 id="top">top</h2>
-<p> 查看系统资源查看器，大写P按cpu占用排序，大写M按内存占用排序<!-- raw HTML omitted --></p>
+<p> 查看系统资源查看器，大写P按cpu占用排序，大写M按内存占用排序</p>
 <h2 id="nmap">nmap</h2>
-<p>扫描目标设备的tcp端口<!-- raw HTML omitted --></p>
+<p>扫描目标设备的tcp端口：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -490,17 +504,17 @@ iptables -D INPUT <span class="m">1</span>
 <pre class="chroma"><code class="language-bash" data-lang="bash">nmap -T4  -sS 10.100.10.102
 </code></pre></td></tr></table>
 </div>
-</div><p>T0 =&gt; paranoid 慢速网络扫描，串行扫描，两次扫描间隔 5 分钟。扫描速度极慢。<br>
-T1 =&gt; Sneky 慢速网络扫描，串行扫描，两次扫描间隔 15 秒，扫描速度较慢。<br>
-T2 =&gt; Polite 中速网络扫描，串行扫描，两次扫描间隔 400 毫秒，扫描速度慢。<br>
-T3 =&gt; Normal 中速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度正常。<br>
-T4 =&gt; Aggressive 快速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度较快。<br>
-T5 =&gt; Normal 快速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度极快。<br>
--sS 使用SYN＋ACK的方法，使用TCP SYN。
--sT 使用TCP的方法， 完成3次握手。
--sU 扫描UDP。
--p 指定端口。
--A  全面系统检测，扫描主机操作系统和所启用的服务。</p>
+</div><p>T0 =&gt; paranoid 慢速网络扫描，串行扫描，两次扫描间隔 5 分钟。扫描速度极慢。</p>
+<p>T1 =&gt; Sneky 慢速网络扫描，串行扫描，两次扫描间隔 15 秒，扫描速度较慢。</p>
+<p>T2 =&gt; Polite 中速网络扫描，串行扫描，两次扫描间隔 400 毫秒，扫描速度慢。</p>
+<p>T3 =&gt; Normal 中速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度正常。</p>
+<p>T4 =&gt; Aggressive 快速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度较快。</p>
+<p>T5 =&gt; Normal 快速网络扫描，并行扫描，两次扫描间隔 0 秒，扫描速度极快。</p>
+<p>-sS 使用SYN＋ACK的方法，使用TCP SYN。</p>
+<p>-sT 使用TCP的方法， 完成3次握手。</p>
+<p>-sU 扫描UDP。</p>
+<p>-p 指定端口。</p>
+<p>-A  全面系统检测，扫描主机操作系统和所启用的服务。</p>
 <h3 id="参考-3">参考:</h3>
 <ul>
 <li><a href="https://www.linuxrumen.com/cyml/668.html">https://www.linuxrumen.com/cyml/668.html</a></li>
