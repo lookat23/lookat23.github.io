@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>博客提交脚本</title>
+      <link>http://localhost:1313/post/blog_script/</link>
+      <pubDate>Thu, 02 Jul 2020 11:04:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/blog_script/</guid>
+      <description>因为博客分为源码部分和静态网页文件部分 每次提交的时候要分开提交 感觉太麻烦了，所以 写个脚本来解决这个问题 因为源码部分添加的文件不确定所以源码部</description>
+    </item>
+    
+    <item>
       <title>使用Shell时遇到的问题</title>
       <link>http://localhost:1313/post/shell_problem/</link>
       <pubDate>Mon, 22 Jun 2020 15:40:59 +0800</pubDate>
