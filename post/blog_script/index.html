@@ -49,7 +49,7 @@
 <meta itemprop="description" content="因为博客分为源码部分和静态网页文件部分 每次提交的时候要分开提交 感觉太麻烦了，所以 写个脚本来解决这个问题 因为源码部分添加的文件不确定所以源码部">
 <meta itemprop="datePublished" content="2020-07-02T11:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-02T11:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="272">
+<meta itemprop="wordCount" content="268">
 
 
 
@@ -127,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-07-02 </span>
         
-          <span class="more-meta"> 约 272 字 </span>
+          <span class="more-meta"> 约 268 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         
       </div>
@@ -202,7 +202,7 @@ fun_push<span class="o">()</span>
 <span class="o">)</span> 
 <span class="o">}</span>
 
-<span class="k">if</span> <span class="o">[[</span> <span class="k">$(</span>git commit --status <span class="p">|</span> grep <span class="s2">&#34;nothing to commit&#34;</span> <span class="p">|</span> wc -l<span class="k">)</span> -eq <span class="m">0</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="k">$(</span>git commit --status <span class="p">|</span> grep <span class="s2">&#34;up-to-date&#34;</span> <span class="p">|</span> wc -l<span class="k">)</span> -eq <span class="m">0</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
     fun_push    
 <span class="k">fi</span>
 
@@ -212,7 +212,7 @@ fun_push<span class="o">()</span>
     git add *
     <span class="nb">read</span> -p <span class="s2">&#34;commit message: &#34;</span> message
     git commit -m<span class="s2">&#34;</span><span class="si">${</span><span class="nv">message</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="k">if</span> <span class="o">[[</span> <span class="k">$(</span>git commit --status <span class="p">|</span> grep <span class="s2">&#34;nothing to commit&#34;</span> <span class="p">|</span> wc -l<span class="k">)</span> -eq <span class="m">0</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="k">$(</span>git commit --status <span class="p">|</span> grep <span class="s2">&#34;up-to-date&#34;</span> <span class="p">|</span> wc -l<span class="k">)</span> -eq <span class="m">0</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
         fun_push    
     <span class="k">fi</span>
 
