@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>防止自己忘记之Bash - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="问题： 判断 循环 比较 特殊 以前在做Windows客户端开发的时候，天天对着C&#43;&#43;来玩，各种奇奇怪怪的玩法和原理可以说非常熟悉。 现在工作需要用C&#43;" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/record-shell/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="防止自己忘记之Bash" />
+<meta property="og:description" content="问题： 判断 循环 比较 特殊 以前在做Windows客户端开发的时候，天天对着C&#43;&#43;来玩，各种奇奇怪怪的玩法和原理可以说非常熟悉。 现在工作需要用C&#43;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/record-shell/" />
+<meta property="article:published_time" content="2020-07-23T09:39:22+08:00" />
+<meta property="article:modified_time" content="2020-07-23T09:39:22+08:00" />
+<meta itemprop="name" content="防止自己忘记之Bash">
+<meta itemprop="description" content="问题： 判断 循环 比较 特殊 以前在做Windows客户端开发的时候，天天对着C&#43;&#43;来玩，各种奇奇怪怪的玩法和原理可以说非常熟悉。 现在工作需要用C&#43;">
+<meta itemprop="datePublished" content="2020-07-23T09:39:22&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-23T09:39:22&#43;08:00" />
+<meta itemprop="wordCount" content="697">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="防止自己忘记之Bash"/>
+<meta name="twitter:description" content="问题： 判断 循环 比较 特殊 以前在做Windows客户端开发的时候，天天对着C&#43;&#43;来玩，各种奇奇怪怪的玩法和原理可以说非常熟悉。 现在工作需要用C&#43;"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">防止自己忘记之Bash</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-23 </span>
+        
+          <span class="more-meta"> 约 697 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本">基本</a>
+      <ul>
+        <li><a href="#bash的本质一切皆字符串">Bash的本质：一切皆字符串</a></li>
+        <li><a href="#单引号双引号元字符">单引号、双引号、元字符</a></li>
+        <li><a href="#判断">判断</a></li>
+        <li><a href="#参考">参考</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>问题：<br>
+判断<br>
+循环<br>
+比较<br>
+特殊</p>
+</blockquote>
+<p>以前在做Windows客户端开发的时候，天天对着C++来玩，各种奇奇怪怪的玩法和原理可以说非常熟悉。
+现在工作需要用C++的地方很小，反而是什么语言都用一下，导致每个语言都是用的时候查一下。连当年
+很熟悉的C++也感觉有点陌生了。可能是自己记性不太好，无论当时对那个语言多熟悉，过后基本就忘得
+差不多了，不过编程语言表面的东西其实也就这样，所以萌生记录一下编程语言的基本，也记录一下自己
+遇到的特殊问题，为自己以后需要用回这种语言时能给自己回看一下。<br>
+感觉这段时间用得比较多的算是Shell吧，那就先记录Shell吧。我一般都是用Bash，所以下面说的默认都是
+说的Bash</p>
+<h1 id="基本">基本</h1>
+<h2 id="bash的本质一切皆字符串">Bash的本质：一切皆字符串</h2>
+<p>看看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">v</span><span class="o">=</span>3+3
+$ <span class="nb">echo</span> <span class="nv">$v</span>
+3+3
+</code></pre></td></tr></table>
+</div>
+</div><p>在 Bash 中即使不带引号，数字也只是字符，不会出现求值的操作。</p>
+<h2 id="单引号双引号元字符">单引号、双引号、元字符</h2>
+<p>在 Bash 中，不使用引号也是可以作为字符串的，如<code>echo abcd</code>是正确的使用方法。需要用引号就是
+因为标题中说到的元字符，Bash中有9个元字符，元字符会将一个字符串分割为多个子串，它们是<code>| &amp; ( ) ; &lt; &gt; space tab</code>。当字符串中出现
+元字符的时候，不使用引号Bash就会让元字符发挥它原本的功能。<br>
+而单引号和双引号的区别是，单引号会令字符不具有特殊含义，如变量的展开：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">v</span><span class="o">=</span>hello
+$ <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$v</span><span class="s2">&#34;</span>
+hello
+$ <span class="nb">echo</span> <span class="s1">&#39;$v&#39;</span>
+<span class="nv">$v</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当然，Bash也是支持特殊字符转义的，也和其它语言一样是用<code>\</code>。</p>
+<h2 id="判断">判断</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">if</span> <span class="nb">true</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s1">&#39;true&#39;</span>
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="s1">&#39;false&#39;</span>
+<span class="k">fi</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面的写法和上面功能一样，只需用<code>;</code>符隔开即可，其它语言很小这样写，但在Bash中出现得不小：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">if</span> true<span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="s1">&#39;true&#39;</span><span class="p">;</span> <span class="k">else</span> <span class="nb">echo</span> <span class="s1">&#39;false&#39;</span><span class="p">;</span> <span class="k">fi</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/youxia/p/LinuxDesktop006.html">https://www.cnblogs.com/youxia/p/LinuxDesktop006.html</a> 博主的文章比我写的好得多，
+非常建议看看，而且博主的其它文章也很值得看。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-07-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/qt-study-1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Qt学习1</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/blog_script/">
+            <span class="next-text nav-default">博客提交脚本</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

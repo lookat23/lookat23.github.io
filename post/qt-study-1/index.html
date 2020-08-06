@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Qt学习1 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="Qt比较出名的应该是它的跨平台能力，刚好我在不同地方用的系统也不一样，包括Windows、Linux(UOS)，Mac，所以截图也可能是3个" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/qt-study-1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Qt学习1" />
+<meta property="og:description" content="Qt比较出名的应该是它的跨平台能力，刚好我在不同地方用的系统也不一样，包括Windows、Linux(UOS)，Mac，所以截图也可能是3个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/qt-study-1/" />
+<meta property="article:published_time" content="2020-08-06T16:34:22+08:00" />
+<meta property="article:modified_time" content="2020-08-06T16:34:22+08:00" />
+<meta itemprop="name" content="Qt学习1">
+<meta itemprop="description" content="Qt比较出名的应该是它的跨平台能力，刚好我在不同地方用的系统也不一样，包括Windows、Linux(UOS)，Mac，所以截图也可能是3个">
+<meta itemprop="datePublished" content="2020-08-06T16:34:22&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-06T16:34:22&#43;08:00" />
+<meta itemprop="wordCount" content="890">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Qt学习1"/>
+<meta name="twitter:description" content="Qt比较出名的应该是它的跨平台能力，刚好我在不同地方用的系统也不一样，包括Windows、Linux(UOS)，Mac，所以截图也可能是3个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Qt学习1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-06 </span>
+        
+          <span class="more-meta"> 约 890 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#初次使用">初次使用</a>
+      <ul>
+        <li><a href="#qtcreator使用">QtCreator使用</a>
+          <ul>
+            <li><a href="#遇到的问题">遇到的问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#visual-studio使用">Visual Studio使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Qt比较出名的应该是它的跨平台能力，刚好我在不同地方用的系统也不一样，包括Windows、Linux(UOS)，Mac，所以截图也可能是3个系统随机的截图。</p>
+<h1 id="安装">安装</h1>
+<p>先下载，地址：<a href="https://download.qt.io">https://download.qt.io</a>，我下载的是5.9的版本，使用 vs 开发的话，还需要安装插件，地址：<a href="https://download.qt.io/official_releases/vsaddin/">https://download.qt.io/official_releases/vsaddin/</a>。这个 Qt 的官方下载网站可能正常访问会有点慢，可以上网找些第三方源去下载一下。</p>
+<p>安装3个平台都没什么问题。Linux上可能需要安装一下依赖<code>sudo apt-get install libgl1-mesa-dev g++ make gdb</code> ，<code>gdb</code>记得装上，因为是个新系统，没安装过<code>gdb</code>，没装导致在 Qt Creator 提示调试器未设置，没法调试程序。我是把source（源码）都装上，方便以后学习。Windows下，designer.exe是QT的设计器，assistant.exe是QT的文档</p>
+<h1 id="初次使用">初次使用</h1>
+<p>3个平台都能使用 Qt Creator 来进去Qt程序的开发，在 Windows 平台下，还能用宇宙第一IDE vs来开发Qt，我以前工作用的都是 vs，所以对 vs 可谓相当熟悉，可能之后会用 vs 来继续学习Qt比较多。</p>
+<p>考虑到项目可能是跨平台的，文件名大小写在 Windows不敏感，Unix 系的敏感，将<strong>文件名统一为小写</strong>跨平台时可以避免不必要的麻烦。</p>
+<h2 id="qtcreator使用">QtCreator使用</h2>
+<p>使用QTCreater创建项目：</p>
+<p><img src="1.png" alt=""></p>
+<p>第一个是带界面的程序，第二个是控制台。</p>
+<p>生成项目后，有几个特殊的文件：</p>
+<ul>
+<li>
+<p><strong>.pro</strong> 用来配置项目。</p>
+</li>
+<li>
+<p><strong>.ui</strong> 界面配置文件，和界面编辑器联动。</p>
+</li>
+<li>
+<p><strong>pro.user</strong> 编译环境配置文件，如果有编译错误，可以尝试把这个文件删掉让它重新生成,因为每个人这个配置可能不一样，所以上传代码的时候可以删掉。</p>
+</li>
+</ul>
+<h3 id="遇到的问题">遇到的问题</h3>
+<p><img src="2.png" alt=""></p>
+<p>在Windows下编译项目出现图上的错误，后来发现是路径有中文导致的，换回英文路径一切正常。</p>
+<h2 id="visual-studio使用">Visual Studio使用</h2>
+<p>在 vs 中使用需要安装插件，安装完后，在新建项目时 Visual C++ 下的 测试中便能看到Qt的项目，我看别人是单独有一项Qt的列表项，不知为什么我的Qt项目都在测试里面：</p>
+<p><img src="3.png" alt="1596710458632"></p>
+<p>这时候创建好项目，编译项目会出错：</p>
+<p><img src="4.png" alt=""></p>
+<p>原因是还要设置 qmake 的路径，在下图的位置添加上 qmake.exe 的路径：</p>
+<p><img src="5.png" alt=""></p>
+<p><img src="6.png" alt=""></p>
+<p>现在应该就能正常使用 vs 编译 Qt的项目了。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-08-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/record-shell/">
+            <span class="next-text nav-default">防止自己忘记之Bash</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

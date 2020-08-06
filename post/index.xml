@@ -6,10 +6,28 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 02 Jul 2020 11:04:28 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2020 16:34:22 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Qt学习1</title>
+      <link>http://localhost:1313/post/qt-study-1/</link>
+      <pubDate>Thu, 06 Aug 2020 16:34:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/qt-study-1/</guid>
+      <description>Qt比较出名的应该是它的跨平台能力，刚好我在不同地方用的系统也不一样，包括Windows、Linux(UOS)，Mac，所以截图也可能是3个</description>
+    </item>
+    
+    <item>
+      <title>防止自己忘记之Bash</title>
+      <link>http://localhost:1313/post/record-shell/</link>
+      <pubDate>Thu, 23 Jul 2020 09:39:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/record-shell/</guid>
+      <description>问题： 判断 循环 比较 特殊 以前在做Windows客户端开发的时候，天天对着C++来玩，各种奇奇怪怪的玩法和原理可以说非常熟悉。 现在工作需要用C+</description>
+    </item>
     
     <item>
       <title>博客提交脚本</title>
