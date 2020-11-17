@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>记一次修复漏洞的故事</title>
+      <link>http://localhost:1313/post/bug1/</link>
+      <pubDate>Sat, 14 Nov 2020 05:09:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/bug1/</guid>
+      <description>前言 风和日丽的天气很舒服，又开始了一天愉快的工作。早上客户反馈需要修复漏洞，其中一个漏洞是CVE-2016-8610，这是一个关于opens</description>
+    </item>
+    
+    <item>
       <title>Qt学习1</title>
       <link>http://localhost:1313/post/qt-study-1/</link>
       <pubDate>Thu, 06 Aug 2020 16:34:22 +0800</pubDate>

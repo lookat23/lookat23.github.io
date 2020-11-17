@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记一次修复漏洞的故事 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="前言 风和日丽的天气很舒服，又开始了一天愉快的工作。早上客户反馈需要修复漏洞，其中一个漏洞是CVE-2016-8610，这是一个关于opens" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/bug1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记一次修复漏洞的故事" />
+<meta property="og:description" content="前言 风和日丽的天气很舒服，又开始了一天愉快的工作。早上客户反馈需要修复漏洞，其中一个漏洞是CVE-2016-8610，这是一个关于opens" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/bug1/" />
+<meta property="article:published_time" content="2020-11-14T05:09:10+08:00" />
+<meta property="article:modified_time" content="2020-11-14T05:09:10+08:00" />
+<meta itemprop="name" content="记一次修复漏洞的故事">
+<meta itemprop="description" content="前言 风和日丽的天气很舒服，又开始了一天愉快的工作。早上客户反馈需要修复漏洞，其中一个漏洞是CVE-2016-8610，这是一个关于opens">
+<meta itemprop="datePublished" content="2020-11-14T05:09:10&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-14T05:09:10&#43;08:00" />
+<meta itemprop="wordCount" content="4695">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记一次修复漏洞的故事"/>
+<meta name="twitter:description" content="前言 风和日丽的天气很舒服，又开始了一天愉快的工作。早上客户反馈需要修复漏洞，其中一个漏洞是CVE-2016-8610，这是一个关于opens"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记一次修复漏洞的故事</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-14 </span>
+        
+          <span class="more-meta"> 约 4695 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#为何这么折腾">为何这么折腾</a></li>
+    <li><a href="#折腾之路-1">折腾之路-1</a></li>
+    <li><a href="#折腾之路-2">折腾之路-2</a></li>
+    <li><a href="#折腾之路-3">折腾之路-3</a></li>
+    <li><a href="#折腾之路-4">折腾之路-4</a></li>
+    <li><a href="#折腾之路-5">折腾之路-5</a></li>
+    <li><a href="#折腾之路-6">折腾之路-6</a></li>
+    <li><a href="#折腾之路-7">折腾之路-7</a></li>
+    <li><a href="#经验和教训">经验和教训</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言">前言</h1>
+<p>风和日丽的天气很舒服，又开始了一天愉快的工作。早上客户反馈需要修复漏洞，其中一个漏洞是CVE-2016-8610，这是一个关于openssl的漏洞，查了资料还是360报的<a href="https://security.360.cn/cve/CVE-2016-8610/">CVE-2016-8610</a>。修复也很简单，就是升级openssl嘛，简单傻瓜。那就没有这篇文章，这个故事了：）。</p>
+<h1 id="为何这么折腾">为何这么折腾</h1>
+<p>因为需要升级的是openssl库，这是很多程序的底层依赖，一个搞不好系统就崩了。如果是测试环境还好，我还能重来N次，但修复漏洞是要远程过去直接在生产环境升级。这让我有点怕，能不升级就最好了。</p>
+<p>为了找到最安全的方法，我去研究这个漏洞的原理。通过查看漏洞对应的patch文件，知道了这个漏洞的情况。简单来说就是ssl握手后，客户端可以无节制地发海量无效的WARNING消息过来，openssl对每一条WARNING还很认真的处理，导致cpu被跑满了，这种坑爹客户端一发现肯定立即就close掉啊。所以，这个patch就是这样做的，原理很简单，代码也很简单。那有什么办法不升级openssl来修复漏洞呢？我觉得还要去找一样东西来研究一下，那就是扫描这个漏洞的工具，知道它是怎样检测的我才好把它骗了啊：）。</p>
+<p>在网上找到了这个漏洞的<a href="https://github.com/cujanovic/CVE-2016-8610-PoC">PoC</a>，和这个漏洞的<a href="https://github.com/tomato42/tlsfuzzer/blob/master/scripts/test-ssl-death-alert.py">扫描程序</a>。立即用Poc试了一下本地环境，确实nginx立即被跑满了。看来只能升级了。但要升级也希望尽量用回系统的deb包，漏洞说明上说要升级到1.0.2i才能修复漏洞。我看了一下Debian 8最高的openssl版本是 openssl 1.0.1.t。这就很那个了&hellip;，debian 8老骥伏枥，尚能饭否啊。折腾之路正式开始&hellip;</p>
+<h1 id="折腾之路-1">折腾之路-1</h1>
+<p>对 Debian8 安装openssl 1.0.2的问题，我相信已经有很多老司机想过，上谷歌搜搜就对了。网上说因为 Debian 以稳定著称，所以源里面的软件版本会比较旧，所以官方有一个叫 <strong>Backport</strong>的官方源来解决这个问题。旧版不代表漏洞没修复，官方源中的软件就很可能是只修复漏洞，而不更新版本。，里面会有新版openssl。看到这里高兴的我立即去清华源找了源的对应地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">deb https://mirrors.tuna.tsinghua.edu.cn/debian/ jessie-backports main contrib non-free
+</code></pre></td></tr></table>
+</div>
+</div><p>添加到**/etc/apt/sources.list**添加完立即输入<code>apt-get update</code>来更新列表，居然提示地址404。挖槽清华也这么不靠谱吗，直接打开<a href="https://mirrors.tuna.tsinghua.edu.cn/debian/dists/">地址</a>去找是不是真的没，其它版本有，**jessie-backports**真的没，**撞鬼了**，清华这么辣鸡吗，不应该啊。上网找原因，几经波折找到了篇<a href="https://www.lucas-nussbaum.net/blog/?p=947">文章</a>。原来jessie-backports已经在官方源中被删除，坑啊，但文章提到了Debian有一个归档地址还存在：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">deb http://archive.debian.org/debian/ jessie-backports main contrib non-free
+deb-src http://archive.debian.org/debian/ jessie-backports main contrib non-free
+</code></pre></td></tr></table>
+</div>
+</div><p>添加后更新源还是不行的，会提示已经过期，还好文章有教怎样绕过：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">echo &#39;Acquire::Check-Valid-Until no;&#39; &gt; /etc/apt/apt.conf.d/99no-check-valid-until
+</code></pre></td></tr></table>
+</div>
+</div><p>到这里终于添加上Debian8的Backport源了。折腾完了吗？</p>
+<h1 id="折腾之路-2">折腾之路-2</h1>
+<p>当然还没，如果用爬山来比喻，去山峰的路我还在山脚。</p>
+<p>添加完源后，更新源，再使用<code>apt-cache show opensshl</code>查看最新版本openssl是多小，发现被骗了，Backport里面没有新版的openssl啊。好吧，虽然学到了东西，但一切又回到了原点，继续折腾吧。</p>
+<p>PPA的第三方源我是不考虑的，那没意义，还不如自己编译。</p>
+<p>下一步怎么办呢，是否就要自己编译呢，感觉还能再挣扎一下。上网找找，又去官方源找找。终于发现了眉目。查看了Debian8官方源的<a href="http://ftp.debian.org/debian/dists/jessie/ChangeLog">更新日志</a>，原来Debian虽然软件不会升级到新版本，但安全补丁是会打到旧版本中的，所以如果只是看CVE的介绍并不完全正确，旧版不代表漏洞没修复，官方源中的软件就很可能是只修复漏洞，而不更新版本。而CVE-2016-8610这个漏洞就修复在了<strong>1.0.1t-deb8u6</strong>这个版本中。<u>这里说个插曲，在网上就有人吐槽扫漏软件有时候并不会管漏洞是否存在，只要判断那个软件版本不符合要求就认为漏洞存在，其实我是理解的，毕竟不能动不动就发起攻击，就算攻击了也不是一定知道是否成功，用版本号来判断是比较理智的方法，但这违背了有就是有，没就是没的真理。</u>虽然怕扫漏会有我上面说的问题，但起码我已经站在真理的一方，先升级了再说。</p>
+<p>升级很简单，更新一下源，然后<code>apt-get install openssl</code>即可，再重启一下Nginx。然后用漏洞的PoC试一下。what？cpu又被跑满了，又撞鬼了？</p>
+<h1 id="折腾之路-3">折腾之路-3</h1>
+<p>这就真的很头痒了，我以为已经找到了合适的方法，结果一点用都没有。难道没升级成功？不对，再执行<code>apt-get install openssl</code>已经提示软件是最新了。难度被apt-get坑了？立即使用命令<code>dpkg -L openssl</code>包里都是什么文件，发现包中有openssl程序，但其实里面没包含libssl.so、libcrypto.so文件的。使用md5sum查这三个文件的md5sum，确实两个so的md5并没有改变。原来这两个so是在<strong>libssl1.0.0</strong>这个包中，虽然openssl包依赖了<strong>libssl1.0.0</strong>，但安装openssl的时候居然没有顺带帮我更新依赖包，看来<code>apt-get install</code>这种方法不是正确的更新软家包的方法T_T。好吧，不要激动，<code>apt-get install libssl1.0.0</code>一下好了。更新完后确保了两个so的md5也变了，重启Nginx。跑一下PoC。what？cpu又被跑满了，又撞鬼了？</p>
+<h1 id="折腾之路-4">折腾之路-4</h1>
+<p>生活已经很艰难了，为何openssl还要和我过不去。我不信邪，一定要找到原因。之前我说我除了找到一个PoC以外，还找到一个搜这个漏洞的工具，我决定跑一下看看漏洞是不是真的没修复。这个工具比较奇怪，里面有Fail和Pass俩种结果，但没写那种结果是存在漏洞。我想那些大站漏洞肯定修复了，扫一下他们就知道正反了。然后扫了一下大站，都显示了Pass，再扫一下自己的，结果是Fail。心又凉一截。明明原理这么简单，为何会这样。直接源码编译吧，源码面前，我不相信还能藏鬼。下载官方源的源码并编译安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-get source openssl
+cd openssl 
+openssl-1.0.1t 
+./config -d shared  # -d是调试模式 shared是编译动态库
+make
+make install
+</code></pre></td></tr></table>
+</div>
+</div><p>安装好后还需要让Nginx指向新编译的openssl，在<code>/etc/ld.so.conf</code>中加上路径<code>/usr/local/ssl/lib</code>，再执行一下<code>ldconfig</code>刷新一下，使用<code>ldd /usr/sbin/nginx</code>确定一下Nginx是否连接的动态库路径已经改变。万事具备，重启Nginx。跑一下扫漏软件。结果不出所料，又撞鬼了。</p>
+<h1 id="折腾之路-5">折腾之路-5</h1>
+<p>事实虽然很沮丧，但我有源码，我怕谁。查看刚编译的源码，修复漏洞的补丁确实已经打上，使用打Log大法打点Log看看吧：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">// 最简单但最有效的Log
+FILE *fd = fopen(&#34;/tmp/ssl.log&#34;, &#34;a+&#34;);
+fprintf(fd, &#34;xxx\n&#34;);
+fclose(fd);
+</code></pre></td></tr></table>
+</div>
+</div><p>在补丁添加代码的地方加上Log，然后再跑PoC。居然Log没触发，代码你跑去哪里了，Log不行我上gdb，gdb不是很熟但找找bug也是会的，需要调试源码记得编译的时候关闭优化和打开调试（<code>-O0 -g</code>）。这里记一下我使用gdb的三板斧：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 先去Nginx配置中把进程改为1个方便调试
+worker_processes 1;
+
+使用gdb调试Nginx
+gdb -p Nginx进程id
+
+# 下断点
+gdb b xxx
+gdb b xxx.c:行号
+# 查断点
+info b
+# 删断点
+info b
+
+# 继续运行
+r
+# 暂停运行
+ctrl+c
+
+#断点后
+n # 单步不进入
+s # 单步进入
+bt # 查看堆栈
+l # 查看上下文源码
+p xx # 查看变量xx的值
+</code></pre></td></tr></table>
+</div>
+</div><p>通过gdb调试，发现代码根本没跑到漏洞补丁修改的地方。这就尴尬了，那岂不是白改了？通过认真研究代码，没跑到貌似是协议不对，原来是nginx的配置不对，PoC在跑的时候会要求指定跑SSLv3、TLS1.0、TLS1.1、TLS1.2协议，我指定了TLS1.2，但nginx的配置上我关闭了TLS1.2的协议支持。看来是自己的问题，把nginx改为支持TLS1.2。重启nginx，然后跑PoC和gdb，这次终于触发到漏洞修改的地方了。但依然的，cpu又被跑满了，都调到这个地步了，这次我不怕撞鬼了。</p>
+<h1 id="折腾之路-6">折腾之路-6</h1>
+<p>通过调试，漏洞的修复应该是成功的。那为何PoC会跑满，扫漏又报Fail呢。看来想偷懒不行啊，只能再去看看两个工具的代码。</p>
+<p>先看扫漏，我发现这个扫漏工具默认的warnning尝试次数是4次，就是说握手后，连发4次warnning，没报错就认为pass。这个默认次数是真的坑，因为官方漏洞修复补丁规定到了5次才把客户端断开。立即把次数改为大于5再去测试互联网的大站，果然就fail了。那为何我的环境一直是fail呢，应该是握手协议不对。</p>
+<p>看完扫漏，再看PoC，为何明明漏洞修复了，PoC还是能把我的cpu跑满呢。PoC的代码很简单，先握手连接，然后就狂发warnning，服务器在warnning时5次会把客户端断了。当然PoC是使用多线程断开重连的，断了就再连接继续发。明白了，其实漏洞修复了，但客户端一直连一样会把cpu跑高，只是没漏洞那么厉害而已，也就是这个cpu跑满和这个漏洞无关。</p>
+<h1 id="折腾之路-7">折腾之路-7</h1>
+<p>虽然和漏洞无关了，那如果有人恶意弄一堆客户端疯狂过来连接，岂不是一样会把我的系统搞死，我相信会有办法解决的。是时候谷歌一下了：）。</p>
+<p>首先找到的是两个Nginx的参数，<strong>limit_req</strong>和<strong>limit_conn</strong>，他们可以限制ip的连接和请求的频率，超过就会拒绝。但我添加后发现对握手攻击的这种情况并没有效。感觉Nginx应该有参数能阻止这个阶段的攻击，但我搜索的时候发现的是另外一种方法。</p>
+<p>我找到有人遇到这种<code>handshake attack</code>攻击而在Nginx<a href="https://forum.nginx.org/read.php?2,286113">发问</a>。他自己提到了一个解决的方法，使用工具<code>fail2ban</code>。立马安装和上网搜索怎样用这个工具。安装很简单<code>apt get fail2ban</code>即可，它的本质就是通过正则来匹配服务的日志，再配合iptables对匹配的地址进行限制。它的配置在<code>/etc/fail2ban</code>，其中jail.conf中配置需要打开哪些服务的监控，默认是没有这种nginx的handshake attack的配置。但它可以自己在<code>filter.d</code>中自己添加，网上找到有人写的一份规则（<a href="https://gist.github.com/carboneater/b0299373d3c016da44c193133978dc86">地址</a>）。对这份配置稍加修改并添加到<code>filter.d</code>中。fail2ban有个很方便的命令<code>fail2ban-regex</code>能测试正则是否匹配。加了配置后，再修改jail.conf把这个配置添加上。启动fail2ban服务，使用PoC来试一下。生效了，执行PoC的ip已经被fail2ban拦截，并在一段时间无法连上服务器。<strong>这里有个要注意的，因为fail2ban本质是用正则匹配日志，如果正则写的过于简陋，然后日志文件又一直有日志，就会导致fail2ban去消耗大量cpu去做正则匹配，应该把正则写的尽量准确，并控制好日志的打印量，防止fail2ban过于消耗cpu</strong></p>
+<h1 id="经验和教训">经验和教训</h1>
+<p>终于折腾完了，回头看一切都是合理的，但一开始却发现各种不合理（撞鬼）的事情。纯粹就是自己菜的原因，还要努力啊。总结一下学到的新知识：</p>
+<ul>
+<li>因为 Debian 以稳定著称，所以源里面的软件版本会比较旧，所以官方有一个叫 Backport的官方源来解决这个问题，但Debian 8的Backport源已经被移除。</li>
+<li>低版本的软件不代表漏洞没修复，官方源中的软件就很可能是只修复漏洞，而不更新版本。；</li>
+<li>Debian 8中openssl的动态库不在openssl的包中，而在libssl1.0.0包中，虽然openssl依赖libssl1.0.0，但升级openssl的时候并不会升级libssl.0.0；</li>
+<li>工具不明白的时候还是要先搞懂再用比较好；</li>
+<li>fail2ban工具可以通过正则分析服务日志来抵御网络的工具；</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-11-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/qt-study-1/">
+            <span class="next-text nav-default">Qt学习1</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
