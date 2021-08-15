@@ -6,10 +6,28 @@
     <description>Recent content in Tags on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 04 Jun 2020 11:24:37 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Aug 2021 15:14:24 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>https</title>
+      <link>http://localhost:1313/tags/https/</link>
+      <pubDate>Sun, 15 Aug 2021 15:14:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/https/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>http://localhost:1313/tags/windows/</link>
+      <pubDate>Sun, 15 Aug 2021 15:14:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/windows/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Python</title>

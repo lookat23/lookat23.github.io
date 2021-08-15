@@ -9,8 +9,36 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/https/</loc>
+    <lastmod>2021-08-15T15:14:24+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2021-01-13T09:46:57+08:00</lastmod>
+    <lastmod>2021-08-15T15:14:24+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2021-08-15T15:14:24+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/windows/</loc>
+    <lastmod>2021-08-15T15:14:24+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/https_slow/</loc>
+    <lastmod>2021-08-15T15:14:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -66,13 +94,6 @@
   
   <url>
     <loc>http://localhost:1313/post/check-string-exist-in-another-string/</loc>
-    <lastmod>2020-06-04T11:24:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2020-06-04T11:24:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

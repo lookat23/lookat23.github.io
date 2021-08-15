@@ -17,7 +17,16 @@
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
       <guid>http://localhost:1313/about/</guid>
-      <description>我以为我是c++程序员，但已经很久没写c++了。 每每程序遇到撞鬼的事情时，能激发我最大的好奇心，一定要找到背后的答案。</description>
+      <description>写过几年的VC++，主要写客户端，搞的最多的是自绘，现在很小写C++，但很喜欢一个C++项目（SerenityOS）。 现在主要做下面几样事情</description>
+    </item>
+    
+    <item>
+      <title>解决内网Windows系统访问Https缓慢问题</title>
+      <link>http://localhost:1313/post/https_slow/</link>
+      <pubDate>Sun, 15 Aug 2021 15:14:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/https_slow/</guid>
+      <description>简述 客户反应使用我们的系统访问网页很慢，我们的系统有基于IE和Chromium内核两套逻辑，但结果都是很慢。 具体问题可以转换为这样，一台内网</description>
     </item>
     
     <item>
