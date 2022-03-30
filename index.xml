@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>在Makefile中使用pkg-config</title>
+      <link>http://localhost:1313/post/makefile_shell/</link>
+      <pubDate>Wed, 30 Mar 2022 17:33:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/makefile_shell/</guid>
+      <description>写一个opencv例子时，Makefile中使用pkg-config来添加opencv的编译配置。当时我直观以为Makefile也是可以直接</description>
+    </item>
+    
+    <item>
       <title>解决内网Windows系统访问Https缓慢问题</title>
       <link>http://localhost:1313/post/https_slow/</link>
       <pubDate>Sun, 15 Aug 2021 15:14:24 +0800</pubDate>
