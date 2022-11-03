@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>git项目跨平台管理 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="现在开发的项目基本都是Linux下的项目，开发机上基本都没装图形界面，而且我自己日常使用的系统还是以Windows为主，所以很多时我是通过挂" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/git-project-multi-platform-manage/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="git项目跨平台管理" />
+<meta property="og:description" content="现在开发的项目基本都是Linux下的项目，开发机上基本都没装图形界面，而且我自己日常使用的系统还是以Windows为主，所以很多时我是通过挂" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/git-project-multi-platform-manage/" />
+<meta property="article:published_time" content="2022-11-03T08:44:08+08:00" />
+<meta property="article:modified_time" content="2022-11-03T08:44:08+08:00" />
+<meta itemprop="name" content="git项目跨平台管理">
+<meta itemprop="description" content="现在开发的项目基本都是Linux下的项目，开发机上基本都没装图形界面，而且我自己日常使用的系统还是以Windows为主，所以很多时我是通过挂">
+<meta itemprop="datePublished" content="2022-11-03T08:44:08&#43;08:00" />
+<meta itemprop="dateModified" content="2022-11-03T08:44:08&#43;08:00" />
+<meta itemprop="wordCount" content="1735">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="git项目跨平台管理"/>
+<meta name="twitter:description" content="现在开发的项目基本都是Linux下的项目，开发机上基本都没装图形界面，而且我自己日常使用的系统还是以Windows为主，所以很多时我是通过挂"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">git项目跨平台管理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-11-03 </span>
+        
+          <span class="more-meta"> 约 1735 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#在windows上访问linux目录">在Windows上访问Linux目录</a></li>
+    <li><a href="#在windows管理linux目录下git项目遇到的坑">在Windows管理Linux目录下git项目遇到的坑</a>
+      <ul>
+        <li><a href="#慢">慢</a></li>
+        <li><a href="#报错">报错</a></li>
+        <li><a href="#文件已更改误报">文件已更改误报</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>现在开发的项目基本都是Linux下的项目，开发机上基本都没装图形界面，而且我自己日常使用的系统还是以Windows为主，所以很多时我是通过挂载Linux目录到Windows进行开发的，在Windows下使用图形化的git管理工具和IDE开发起来比较爽。但要这样开发要解决一下问题才能正常使用，下面对这些遇到的问题进行解决记录</p>
+<h1 id="在windows上访问linux目录">在Windows上访问Linux目录</h1>
+<p>要在Windows访问Linux的目录有好几种方法，我用过的有如下几种：</p>
+<ul>
+<li>通过IDE自身的挂载功能</li>
+<li>在Linux安装Smb服务，然后在Windows访问共享目录</li>
+<li>通过sftp协议来挂载目录</li>
+</ul>
+<p>IDE的方式这里不详说，以前用过觉得不太好用，所以我主要用下面的两种。</p>
+<p>如果论体验最好，我个人觉得是Smb的方式是最好。毕竟Smb协议是Windows自家的协议，所以用起来基本不会出什么问题，但有个麻烦的地方是Linux那边必须装Smb服务，还要做一些配置，我的主要测试服务器就弄了Smb服务，但如果每台Linux服务器都这样弄就很麻烦了，还要记住什么时候把服务停了以免泄露的问题就更麻烦了。所以除了经常用到自己的测试服务器外，我一般是通过sftp协议来挂载。</p>
+<p>sftp挂载的方式，我之前用的是 <strong>sshfs-win</strong>（<strong><a href="https://github.com/winfsp/sshfs-win">https://github.com/winfsp/sshfs-win</a></strong>） 这个开源项目来进行挂载，因为原来在Linux用的sshfs命令来挂载，在Windows下好自然就去搜sshfs的Windows版本了。挂载也是能成功的，我用了很长一段时间，但是用这个挂载有个很坑的问题，会有几率导致文件管理器卡死，即使用最新的版本也是会这样，不知是这个开源项目有问题，还是我的电脑有问题。以前还用过一个红色图标的，忘记是什么软件的来挂载sftp目录，但记忆中那个也是不好用，很容易就卡死。直到我发现上司使用一款叫**RaiDrive（<strong><a href="https://www.raidrive.com">https://www.raidrive.com</a></strong>）**软件来挂载sftp目录。这个软件是免费和收费都有的，很好的是免费版已经支持sftp挂载。虽然不是开源的，但稳定性是我用过这么多挂载sftp目录的软件里面最好的，它还能通过很多其它协议来挂载目录，不过我暂时没用过。用这个软件来挂载Linux的目录是暂时我用过比较理想的方式。</p>
+<h1 id="在windows管理linux目录下git项目遇到的坑">在Windows管理Linux目录下git项目遇到的坑</h1>
+<p>首先要说明一下这样做的好处，因为乌龟（TortoiseGit）太好用了，在Linux那边用命令行操作虽然也不是不行，但一个是自己不是很熟练，二个确实查看日志和对比文件之类也没那么直观，在Windows上图形界面看舒服很多。但如标题所说，是有些问题的。</p>
+<h2 id="慢">慢</h2>
+<p>一个是速度的问题，因为目录是通过sftp协议挂载的，所以TortoiseGit去遍历更改会比直接在Linux上慢，如果git本身跟踪了很多文件，那这个问题会比较麻烦。所以Linux和Windows之间的网络越快越好。</p>
+<h2 id="报错">报错</h2>
+<p>在原来的电脑用得好好，但在我的笔记本上，使用TortoiseGit查看Linux目录下的项目，居然会报错，报的是<strong>Could not get all refs. libgit2 returned: corrupted loose reference file</strong>	错误，神奇的是旧电脑并不会报错，想来想去感觉是TortoiseGit版本的问题，所以在笔记本上把原来的TortoiseGit删掉，装回旧版TortoiseGit问题解决，我装的旧版版本是**TortoiseGit 2.5.0.0 **至于依赖的git的版本，没要求。</p>
+<h2 id="文件已更改误报">文件已更改误报</h2>
+<p>在Linux上执行<strong>git status</strong>没有任何文件修改，但在Windows上查看，却发现很多文件的状态都是<strong>Modified</strong>，而且对比文件却什么改动都没有。直觉感觉应该是换行符的问题，因为Linux默认是\n，而Windows默认是\r\n，估计是git帮做了一些转换。上网查了一下，有些参数可以禁用转换，通过右键菜单选择 **ToroiseGit-&gt;Settings-&gt;Git-&gt;Edit global .gitconfig **打开配置文件，然后加上如下配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>core<span class="o">]</span>
+<span class="nv">autocrlf</span> <span class="o">=</span> <span class="nb">false</span>
+<span class="nv">filemode</span> <span class="o">=</span> <span class="nb">false</span>
+<span class="nv">safecrlf</span> <span class="o">=</span> <span class="nb">false</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中除了禁止换行符的转换外，也禁止了因为文件权限不一样导致提示文件已的情况，因为Windows下的文件权限对不上Linux上的权限。配置完应该就没问题了，如果还是提示没改的文件已修改，要看看项目下 **.git/config **配置中是否有上面的配置，因为本地配置会覆盖全局配置</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-11-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/makefile_shell/">
+            <span class="next-text nav-default">在Makefile中使用pkg-config</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

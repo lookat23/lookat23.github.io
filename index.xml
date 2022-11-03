@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>git项目跨平台管理</title>
+      <link>http://localhost:1313/post/git-project-multi-platform-manage/</link>
+      <pubDate>Thu, 03 Nov 2022 08:44:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/git-project-multi-platform-manage/</guid>
+      <description>现在开发的项目基本都是Linux下的项目，开发机上基本都没装图形界面，而且我自己日常使用的系统还是以Windows为主，所以很多时我是通过挂</description>
+    </item>
+    
+    <item>
       <title>在Makefile中使用pkg-config</title>
       <link>http://localhost:1313/post/makefile_shell/</link>
       <pubDate>Wed, 30 Mar 2022 17:33:52 +0800</pubDate>
