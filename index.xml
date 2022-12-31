@@ -17,7 +17,16 @@
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
       <guid>http://localhost:1313/about/</guid>
-      <description>写过几年的VC++，主要写客户端，搞的最多的是自绘，现在很小写C++，但很喜欢一个C++项目（SerenityOS）。 现在主要做下面几样事情</description>
+      <description>最开始写VC++，主要写客户端，搞的最多的是自绘，现在很小写C++，但很喜欢一个C++项目（SerenityOS）。 现在主要做下面几样事情：</description>
+    </item>
+    
+    <item>
+      <title>使用vmware和windbg调试Windows7</title>
+      <link>http://localhost:1313/post/windbg1/</link>
+      <pubDate>Sat, 31 Dec 2022 15:56:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/windbg1/</guid>
+      <description>因为工作的需要，需要对Windows下的设备驱动进行一些调试，所以查了一下如何在Windows开机时进行内核调试。在本机中不能直接进行内核调</description>
     </item>
     
     <item>

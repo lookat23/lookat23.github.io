@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用vmware和windbg调试Windows7 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="因为工作的需要，需要对Windows下的设备驱动进行一些调试，所以查了一下如何在Windows开机时进行内核调试。在本机中不能直接进行内核调" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/windbg1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="使用vmware和windbg调试Windows7" />
+<meta property="og:description" content="因为工作的需要，需要对Windows下的设备驱动进行一些调试，所以查了一下如何在Windows开机时进行内核调试。在本机中不能直接进行内核调" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/windbg1/" />
+<meta property="article:published_time" content="2022-12-31T15:56:15+08:00" />
+<meta property="article:modified_time" content="2022-12-31T15:56:15+08:00" />
+<meta itemprop="name" content="使用vmware和windbg调试Windows7">
+<meta itemprop="description" content="因为工作的需要，需要对Windows下的设备驱动进行一些调试，所以查了一下如何在Windows开机时进行内核调试。在本机中不能直接进行内核调">
+<meta itemprop="datePublished" content="2022-12-31T15:56:15&#43;08:00" />
+<meta itemprop="dateModified" content="2022-12-31T15:56:15&#43;08:00" />
+<meta itemprop="wordCount" content="566">
+
+
+
+<meta itemprop="keywords" content="Windows,windbg," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用vmware和windbg调试Windows7"/>
+<meta name="twitter:description" content="因为工作的需要，需要对Windows下的设备驱动进行一些调试，所以查了一下如何在Windows开机时进行内核调试。在本机中不能直接进行内核调"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用vmware和windbg调试Windows7</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-12-31 </span>
+        
+          <span class="more-meta"> 约 566 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#在windows中添加启动调试的菜单">在Windows中添加启动调试的菜单</a></li>
+        <li><a href="#在vmware添加串口">在vmware添加串口</a></li>
+        <li><a href="#配置windbg">配置windbg</a></li>
+        <li><a href="#启动调试">启动调试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>因为工作的需要，需要对Windows下的设备驱动进行一些调试，所以查了一下如何在Windows开机时进行内核调试。在本机中不能直接进行内核调试，所以通过把  Windows跑在 vmware 中，使用串口的方式，配合windbg来进行调试。下面是配置的步骤。</p>
+<h2 id="在windows中添加启动调试的菜单">在Windows中添加启动调试的菜单</h2>
+<p>为了开机调试，需要打开winload的调试模式，进入系统后，使用管理员模式打开 cmd。使用如下命令创建一个使用串口调试的开机选项</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 先根据原有的启动项(current)，拷贝一个启动项
+bcdedit /copy {current} /d “windebug”
+# 拷贝成功后会显示新的启动的uuid，假设uuid为 xxx，再对新的启动项配置为串口调试
+bcdedit /set {xxx} debug on
+bcdedit /set {xxx} debugtype serial
+bcdedit /set {xxx} debugport 1
+bcdedit /set {xxx} baudrate 115200
+</code></pre></td></tr></table>
+</div>
+</div><p>以上的操作就在启动菜单创建了新的一项，启动了 debug 模式，同时使用串口，频率为115200。配置完可以通过打开 msconfig 工具，选择 “引导” 菜单查看刚才的配置</p>
+<h2 id="在vmware添加串口">在vmware添加串口</h2>
+<p>在虚拟机设置中添加串口端口设备，如下图进行配置
+<img src="1.png" alt=""></p>
+<h2 id="配置windbg">配置windbg</h2>
+<p>打开 windbg，需要打开对应位数的程序，我调试的是64位系统，就要打开64位的windbug。然后依次选择 File -&gt; Kernel Debug 然后如下图配置，<strong>Pipe</strong> 一定要勾上否则会报错
+<img src="2.png" alt=""></p>
+<h2 id="启动调试">启动调试</h2>
+<p>运行虚机，选择启动调试的菜单项，下图菜单叫 windebug。然后等待 windbg 那边有反应已经连接上系统，就可以开始调试
+<img src="3.png" alt="">
+<img src="4.png" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-12-31
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/windows/">Windows</a>
+          <a href="/tags/windbg/">windbg</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/git-project-multi-platform-manage/">
+            <span class="next-text nav-default">git项目跨平台管理</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
