@@ -9,15 +9,36 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/bios/</loc>
+    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/linux/</loc>
+    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/reboot-hang/</loc>
+    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2022-12-31T15:56:15+08:00</lastmod>
+    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2022-12-31T15:56:15+08:00</lastmod>
+    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -179,13 +200,6 @@
   <url>
     <loc>http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2020-04-29T19:39:25+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/linux/</loc>
-    <lastmod>2020-04-29T14:30:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

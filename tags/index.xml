@@ -6,10 +6,28 @@
     <description>Recent content in Tags on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 31 Dec 2022 15:56:15 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 09 Mar 2023 08:35:02 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>bios</title>
+      <link>http://localhost:1313/tags/bios/</link>
+      <pubDate>Thu, 09 Mar 2023 08:35:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/bios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://localhost:1313/tags/linux/</link>
+      <pubDate>Thu, 09 Mar 2023 08:35:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/linux/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>windbg</title>
@@ -80,15 +98,6 @@
       <pubDate>Wed, 29 Apr 2020 19:39:25 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>http://localhost:1313/tags/linux/</link>
-      <pubDate>Wed, 29 Apr 2020 14:30:13 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/linux/</guid>
       <description></description>
     </item>
     

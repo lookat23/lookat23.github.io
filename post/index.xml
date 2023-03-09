@@ -6,10 +6,19 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 31 Dec 2022 15:56:15 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 09 Mar 2023 08:35:02 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux重启失败排查记录</title>
+      <link>http://localhost:1313/post/reboot-hang/</link>
+      <pubDate>Thu, 09 Mar 2023 08:35:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/reboot-hang/</guid>
+      <description>一套新的设备，CPU使用的是 J1800，跑公司的产品出现了重启失败的情况，排除了是服务没正常退出的问题。也确认了之前的硬件配置上不会出现这个</description>
+    </item>
     
     <item>
       <title>使用vmware和windbg调试Windows7</title>

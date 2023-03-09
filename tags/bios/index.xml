@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on hao的博客</title>
-    <link>http://localhost:1313/tags/linux/</link>
-    <description>Recent content in Linux on hao的博客</description>
+    <title>bios on hao的博客</title>
+    <link>http://localhost:1313/tags/bios/</link>
+    <description>Recent content in bios on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 09 Mar 2023 08:35:02 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/tags/bios/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://localhost:1313/post/reboot-hang/</guid>
       <description>一套新的设备，CPU使用的是 J1800，跑公司的产品出现了重启失败的情况，排除了是服务没正常退出的问题。也确认了之前的硬件配置上不会出现这个</description>
-    </item>
-    
-    <item>
-      <title>Linux常用工具命令</title>
-      <link>http://localhost:1313/post/linux_tool/</link>
-      <pubDate>Wed, 29 Apr 2020 14:30:13 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/linux_tool/</guid>
-      <description>技巧 查询所有/root/下的空文件夹 1 find /root -type d -empty find命令使用多个条件 find可以多个条件一起用 用 -o或者 ! 符都可以连接下一个条件，!意思</description>
     </item>
     
   </channel>

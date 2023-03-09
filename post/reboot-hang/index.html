@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linux重启失败排查记录 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="一套新的设备，CPU使用的是 J1800，跑公司的产品出现了重启失败的情况，排除了是服务没正常退出的问题。也确认了之前的硬件配置上不会出现这个" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/reboot-hang/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Linux重启失败排查记录" />
+<meta property="og:description" content="一套新的设备，CPU使用的是 J1800，跑公司的产品出现了重启失败的情况，排除了是服务没正常退出的问题。也确认了之前的硬件配置上不会出现这个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/reboot-hang/" />
+<meta property="article:published_time" content="2023-03-09T08:35:02+08:00" />
+<meta property="article:modified_time" content="2023-03-09T08:35:02+08:00" />
+<meta itemprop="name" content="Linux重启失败排查记录">
+<meta itemprop="description" content="一套新的设备，CPU使用的是 J1800，跑公司的产品出现了重启失败的情况，排除了是服务没正常退出的问题。也确认了之前的硬件配置上不会出现这个">
+<meta itemprop="datePublished" content="2023-03-09T08:35:02&#43;08:00" />
+<meta itemprop="dateModified" content="2023-03-09T08:35:02&#43;08:00" />
+<meta itemprop="wordCount" content="1291">
+
+
+
+<meta itemprop="keywords" content="Linux,bios," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux重启失败排查记录"/>
+<meta name="twitter:description" content="一套新的设备，CPU使用的是 J1800，跑公司的产品出现了重启失败的情况，排除了是服务没正常退出的问题。也确认了之前的硬件配置上不会出现这个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux重启失败排查记录</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-03-09 </span>
+        
+          <span class="more-meta"> 约 1291 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#解决方法">解决方法</a></li>
+    <li><a href="#排查过程">排查过程</a></li>
+    <li><a href="#另一种重启方法">另一种重启方法</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>一套新的设备，CPU使用的是 J1800，跑公司的产品出现了重启失败的情况，排除了是服务没正常退出的问题。也确认了之前的硬件配置上不会出现这个问题。因为产品跑的是 Debian10 的 Linux 系统，所以安装了一个全新的 Debian10 来做测试，也会出现重启卡死的现象。为了解决这个问题，进行了排查，并写下这篇文章做一下记录，方便以后其它问题的调试，和方便遇到同样问题的人。</p>
+<h1 id="解决方法">解决方法</h1>
+<p>先说最后的解决方法，在 bios 中，修改 OS Selection 类型为 <em>Windows 8.x</em>，即可解决问题。
+<img src="1.png" alt=""></p>
+<p>这个解决方法是在网上搜到的，网上能找到好几篇说自己用的 CPU 是 J1900 遇到了这个问题，最后通过上面说的修改 bios 方法解决了问题，虽然 CPU 不是完全一样，但应该J开头的 CPU 都有相同的毛病。</p>
+<h1 id="排查过程">排查过程</h1>
+<p>因为之前同事已经折腾过，所以可以肯定排除了服务没退出导致无法正常关机的情况。我尝试查看了当输入 reboot 后的情况，无法重启的现象并非必现，是一种时不时能正常重启，时不时不行的情况。当无法重启时，终端显示 <code>watchdog： watchdog0: watchdog did not stop!</code> 同时屏幕卡死，意思是连光标也不闪了，同事研究过并非 watchdog 导致无法重启。光标不闪让我感觉可能是图形上出了问题，所以首先我在 Linux 启动参数中加上 nomodeset 的参数，这次卡死后，光标依然能正常闪烁，但依然会一直卡住无法重启。下一步我的想法是让终端输出更多的日志，好排查问题。内核日志是分输出级别的</p>
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>(KERN_EMERG)</td>
+<td>system is unusable</td>
+</tr>
+<tr>
+<td>1</td>
+<td>(KERN_ALERT)</td>
+<td>action must be taken immediately</td>
+</tr>
+<tr>
+<td>2</td>
+<td>(KERN_CRIT)</td>
+<td>critical conditions</td>
+</tr>
+<tr>
+<td>3</td>
+<td>(KERN_ERR)</td>
+<td>error conditions</td>
+</tr>
+<tr>
+<td>4</td>
+<td>(KERN_WARNING)</td>
+<td>warning conditions</td>
+</tr>
+<tr>
+<td>5</td>
+<td>(KERN_NOTICE)</td>
+<td>normal but significant condition</td>
+</tr>
+<tr>
+<td>6</td>
+<td>(KERN_INFO)</td>
+<td>informational</td>
+</tr>
+<tr>
+<td>7</td>
+<td>(KERN_DEBUG)</td>
+<td>debug-level messages</td>
+</tr>
+</tbody>
+</table>
+<p>默认终端应该只会打印4以下级别的内核日志。有一个方法查看和临时修改打印的日志级别就是查看和修改文件 /proc/sys/kernel/printk</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# cat /proc/sys/kernel/printk
+4       4       1       7
+</code></pre></td></tr></table>
+</div>
+</div><p>4个数字分别代表如下：</p>
+<ol>
+<li>控制台日志级别：优先级高于该值的消息将被打印至控制台。</li>
+<li>缺省的消息日志级别：将用该值来打印没有优先级的消息。</li>
+<li>最低的控制台日志级别：控制台日志级别可能被设置的最小值。</li>
+<li>缺省的控制台：控制台日志级别的缺省值。</li>
+</ol>
+<p>我直接把4个数值都设为8，让终端尽可能多的打印日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# echo &#39;8 8 8 8&#39; &gt; /proc/sys/kernel/printk
+</code></pre></td></tr></table>
+</div>
+</div><p>这样设置后，当重启卡死时，卡在的地方是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sd 1:0:0:0 [sda] Synchronizing SCSI cache
+</code></pre></td></tr></table>
+</div>
+</div><p>在没有卡死的情况下，上面那句之后会打印多如下的内容，并最终重启成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">reboot: Restarting system
+reboot: machine restart
+ACPI MEMORY or I/O RESET_REG
+</code></pre></td></tr></table>
+</div>
+</div><p>我查过 Linux 的重启原理，通过对 CPU 某个针脚发送电信号来达到重启的功能，而我查看过源代码这种操作是在日志 <code>reboot: Restarting system</code> 之后。 查到这里我认为这个重启时不时失效的情况，并不是硬件重启相关的操作导致无法重启，而是内核执行重启模块操作之前的某个操作卡死导致的无法重启。下一步我准备通过添加日志重编内核，或者使用 kprobe 方式来进行更深入的调试，不过因为途中我已经找到了通过修改 bios 能解决问题，没继续进行更多的排查。</p>
+<h1 id="另一种重启方法">另一种重启方法</h1>
+<p>在查看解决方法时，找到了一种使用sysrq来重启的方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">reboot.sh:
+<span class="c1">#!/bin/sh</span>
+<span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/kernel/sysrq
+<span class="nb">echo</span> u &gt; /proc/sysrq-trigger
+sync
+<span class="nb">echo</span> b &gt; /proc/sysrq-trigger
+
+poweroff.sh:
+<span class="c1">#!/bin/sh</span>
+<span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/kernel/sysrq
+<span class="nb">echo</span> u &gt; /proc/sysrq-trigger
+sync
+<span class="nb">echo</span> o &gt; /proc/sysrq-trigger
+</code></pre></td></tr></table>
+</div>
+</div><p>这种方法能重启成功，也说明了并非硬件在重启上出了问题，而是其它地方导致。我也是第一次知道原来键盘是有sysrq这个键，就在insert键上方。上图的命令例如 b 是重启，那对应在键盘上按下 alt+b+sysrq 也能实现重启。我试过按上述按键重启，要多尝试才知道按的方法，顺序不对会失败。但上面的重启方法并不会正常停止服务，所以非必须的话，不应该直接使用。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-03-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          <a href="/tags/bios/">bios</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/windbg1/">
+            <span class="next-text nav-default">使用vmware和windbg调试Windows7</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2023
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
