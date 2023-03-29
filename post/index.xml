@@ -6,10 +6,19 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 09 Mar 2023 08:35:02 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 Mar 2023 09:41:28 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGPT和近期的一些思考</title>
+      <link>http://localhost:1313/post/openai/</link>
+      <pubDate>Wed, 29 Mar 2023 09:41:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/openai/</guid>
+      <description>使用OpenGPT 大概在2个月前注册了 OpenGPT 的账号来体验，当时的思维是按以前使用搜索引擎的思维来使用，试了一下后，感觉虽然是牛逼，但玩了几下也就</description>
+    </item>
     
     <item>
       <title>Linux重启失败排查记录</title>

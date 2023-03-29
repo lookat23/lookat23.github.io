@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>OpenGPT和近期的一些思考 - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="使用OpenGPT 大概在2个月前注册了 OpenGPT 的账号来体验，当时的思维是按以前使用搜索引擎的思维来使用，试了一下后，感觉虽然是牛逼，但玩了几下也就" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/openai/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="OpenGPT和近期的一些思考" />
+<meta property="og:description" content="使用OpenGPT 大概在2个月前注册了 OpenGPT 的账号来体验，当时的思维是按以前使用搜索引擎的思维来使用，试了一下后，感觉虽然是牛逼，但玩了几下也就" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/openai/" />
+<meta property="article:published_time" content="2023-03-29T09:41:28+08:00" />
+<meta property="article:modified_time" content="2023-03-29T09:41:28+08:00" />
+<meta itemprop="name" content="OpenGPT和近期的一些思考">
+<meta itemprop="description" content="使用OpenGPT 大概在2个月前注册了 OpenGPT 的账号来体验，当时的思维是按以前使用搜索引擎的思维来使用，试了一下后，感觉虽然是牛逼，但玩了几下也就">
+<meta itemprop="datePublished" content="2023-03-29T09:41:28&#43;08:00" />
+<meta itemprop="dateModified" content="2023-03-29T09:41:28&#43;08:00" />
+<meta itemprop="wordCount" content="2532">
+
+
+
+<meta itemprop="keywords" content="openai,opengpt,思考," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OpenGPT和近期的一些思考"/>
+<meta name="twitter:description" content="使用OpenGPT 大概在2个月前注册了 OpenGPT 的账号来体验，当时的思维是按以前使用搜索引擎的思维来使用，试了一下后，感觉虽然是牛逼，但玩了几下也就"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">OpenGPT和近期的一些思考</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-03-29 </span>
+        
+          <span class="more-meta"> 约 2532 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#使用opengpt">使用OpenGPT</a></li>
+        <li><a href="#对opengpt的恐惧">对OpenGPT的恐惧</a></li>
+        <li><a href="#面对-opengpt的威胁如何应对和近期的一些思考">面对 OpenGPT的威胁如何应对和近期的一些思考</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="使用opengpt">使用OpenGPT</h2>
+<p>大概在2个月前注册了 OpenGPT 的账号来体验，当时的思维是按以前使用搜索引擎的思维来使用，试了一下后，感觉虽然是牛逼，但玩了几下也就没继续玩下去了。这段时间重新再用起  OpenGPT ，发现自己有点离不开它了。细想原因有下面几点：</p>
+<ol>
+<li>之前使用OpenGPT，有个不爽的地方是它回答得很慢，估计大概1秒也就吐个2-3个字这样，等它出答案有点不耐烦了。这段时间使用突然发现它吐字快了很多，我以为是 OpenGPT 变了，后来发现不全是。最后找到了原因，如果我使用香港外的节点来使用 OpenGPT，吐字依然很慢，但我使用香港节点吐字就很快。不过我没记错的话，2个月前用香港节点连 OpenGPT 是会提示地区不可用的，应该香港地区能使用是近段时间的事情。</li>
+<li>我渐渐懂得如何和 OpenGPT 进行有效的沟通，它对于我而言比搜索引擎有3点更胜一筹的点。
+<ol>
+<li>它是上下文关联的，如果我之前和它聊的是 PHP 的问题，那接下来的提问即使没提到PHP，它也会知道我在说的是PHP  的事情，随着聊天的上下文叠加的信息量越大，能更大可能获取到我最终想获取的内容答案。</li>
+<li>它不单是关键字匹配的，使用搜索引擎，如果我对某个领域不熟悉或者某个词使用不当，很有可能导致我想找的网页内容和我搜索的单词匹配不上，导致找不到想要的内容。但 OpenGPT 却有能猜出我想问的真正内容的能力。它能更好地扮演领域专家的角色，我给它模糊的问题，它能通过它专业的知识知道我在问什么，并给出专业的答案。这是搜索引擎做不到的。</li>
+<li>它能给出最终的结果，而不用我在搜索引擎返回的茫茫网页中去找寻。如果我想要一个 Python 操作数据库的例子。我原来的方式是在搜索引擎输入<code>python 数据库 例子</code>这样的关键字来进行搜索，然后在搜索引擎列出的网页中用肉眼去筛选哪个网站是靠谱的，打开几个靠谱的网站，再在那些网站里面找有没有我想要的结果。而和 OpenGPT 的沟通是能直接给我一个完美答案的，我可以直接输入<code>给我一个Python操作数据库的例子</code>，然后 OpenGPT 会输出靠谱的代码例子，如果我不满意，还能继续输入不满意的地方例如<code>除了使用MySQLdb模块，使用其它模块的例子有吗</code>这种以前只有和懂 Python 的人聊天才问出的问题。OpenGPT也能给我满意的答案，并给出具体和靠谱的例子。</li>
+</ol>
+</li>
+</ol>
+<p>细想我离不开OpenGPT的原因就是：有了OpenGPT，就好像有个各领域都懂的专家坐在我旁边，静候着我提出各种问题，然后不厌其烦地给出专业的答案。</p>
+<h2 id="对opengpt的恐惧">对OpenGPT的恐惧</h2>
+<p>当我懂得 OpenGPT 的强大，我自然生起了对 OpenGPT 的恐惧。现在使用 OpenGPT 还需要打开网站进行对话。但我相信不久的将来，只要带着某个设备在身上（或者是一副眼镜之类？）。OpenGPT 随时接收输入的声音或图像，给出即时的反馈给使用者，将不会遥远。
+作为个人自私的欲望，最直接的想法是我希望事情往两种情况走。</p>
+<ol>
+<li>OpenGPT 从未出现，我依然比大部分人更会使用搜索引擎，我的经验使得我能更快搜到更靠谱的答案。</li>
+<li>OpenGPT 只有我能使用。</li>
+</ol>
+<p>不过事实肯定不会向这两个方向走，OpenGPT 或者其它的 AI 将会越来越普及，大家都用上这种程度的 AI 只是时间问题。很多原来的经验壁垒将会被抹平，大家借助 AI 回到了一个起跑线，最多也只是早点接触的人能提早站到起跑线而已。</p>
+<h2 id="面对-opengpt的威胁如何应对和近期的一些思考">面对 OpenGPT的威胁如何应对和近期的一些思考</h2>
+<p>近期在想找工作的事情，为何这个话题会和 OpenGPT 放一起，因为他们有很强的相关性。作为程序员，找工作需要做一些准备，例如刷算法题、重新复习一些特定网络或其它的一些知识。我在做这些准备时，我感觉这件事情可能以后会有所改变，如果能带着 OpenGPT 来面试，这些问题压根不是问题，让 OpenGPT 输出一个快排的例子，让 OpenGPT 解释一下3次握手和4次挥手，甚至给一段代码给 OpenGPT 让他猜输出的值。这些都是 OpenGPT 的强项，可以说给出理想的答案毫无压力。<br>
+就如上面说过的，经验壁垒就这样被抹平了，近段我一直在思考自己如何能找到工作，保持自己的竞争力。特别是在 OpenGPT 出现后，如何不因新事物的出现，而不被淘汰。到现在我也没有一个最终的答案，但我有如下几点思考。</p>
+<ol>
+<li><em>玄学无法被取缔</em> 先说这个我无法否认，但不愿多考虑的点。中医、茶道，如何用最合符逻辑的方式去判断好坏对错。是信风水大师的话，还是信 AI 算法选出来的风水。某些行业很难被 AI 取缔。</li>
+<li><em>沟通能力无法被取代</em> 最近我看一个视频，是一个以 OpenGPT 为题材的搞笑视频，内容是 OpenGPT 作为乙方，满足提问者甲方的需求，但里面甲方的问题让 OpenGPT 哑口无言。其中两个问题是<code>我想要五彩斑斓的黑</code>、<code>我想要绝对透明的白</code>，让 OpenGPT哑口无言，这应该算是旧瓶装新酒，设计师领域的旧笑话套到 OpenGPT 上。内容很搞笑，但我觉得这正正说明什么能力不被 OpenGPT 取代。沟通能力是无法被 OpenGPT 取代的，现实中这类需求会变着花样出现，如果完全按照逻辑来思考，这些是伪需求，但现实中却很常见。拥有沟通能力的人不会说世上没有五彩斑斓的黑，而会想尽办法满足乙方，通过沟通把需求落地，给出一个符合物理规律的答案。</li>
+<li><em>个人效率不因 AI 的出现而改变</em>，引用一本我喜欢的书《自律修炼手册》里面的一段话<br>
+<code>尽管有很多提高效率的技术工具，但个人效率依然是你最大的瓶颈。别一心只想靠技术工具来提高效率。如果你不思考在没有工具时怎样提高效率，那你在有工具的时候也不会更有效率——这些工具只会掩盖你的坏习惯。但是，如果你在没有技术工具时已经是勤勉的，那工具就会让你更进一步。请把工具看作一个“力量倍增器”——它只能让你本身已有的力量进一步增强。</code><br>
+工具永远都只是工具，它就像“力量倍增器”。即使所有的经验都被抹平，每个人的效率都是有差别的。个人效率（自律能力）的差异是 AI 无法改变的。</li>
+</ol>
+<p>通过上面的思考，我想到身边的一个人是 AI 的出现也不会影响他竞争力的，便是我的上司。在上面说的2和3点都做得很好</p>
+<ul>
+<li>作为领导他要经常和各种人进行协调和沟通，而且他做得比一般的领导要多，一个很实际的结果就是能感觉到他在公司的话语权越来越重，别人有问题都会找他讨论。</li>
+<li>个人效率也很高，抛开具体的代码能力和经验，同样遇到一个问题，或许我还在想，他已经理清思路，动手写出demo。这种差异并不单纯是代码能力和经验的问题，是我还在被qq、微信、各种事情分神时，他已经专注于解决这个问题。其实作为领导，他要烦心的问题绝对比我多，但他能专注于解决当前的问题，个人效率相当高。</li>
+</ul>
+<p><em>所以，我的结论是，我应该向他学习，而且不单是他作为程序员的能力，重点是他的沟通能力和超高的个人效率</em></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-03-29
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/openai/">openai</a>
+          <a href="/tags/opengpt/">opengpt</a>
+          <a href="/tags/%E6%80%9D%E8%80%83/">思考</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/reboot-hang/">
+            <span class="next-text nav-default">Linux重启失败排查记录</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2023
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

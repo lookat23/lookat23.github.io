@@ -9,6 +9,48 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/openai/</loc>
+    <lastmod>2023-03-29T09:41:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/opengpt/</loc>
+    <lastmod>2023-03-29T09:41:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/openai/</loc>
+    <lastmod>2023-03-29T09:41:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2023-03-29T09:41:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2023-03-29T09:41:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2023-03-29T09:41:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/tags/bios/</loc>
     <lastmod>2023-03-09T08:35:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,20 +66,6 @@
   
   <url>
     <loc>http://localhost:1313/post/reboot-hang/</loc>
-    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2023-03-09T08:35:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
