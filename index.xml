@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>记一次内网Windows不能获取IP的故障</title>
+      <link>http://localhost:1313/post/ip-conflict/</link>
+      <pubDate>Wed, 19 Jul 2023 18:55:09 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/ip-conflict/</guid>
+      <description>前些日子内网发生一个有趣的事情，网络内的机器都能正常上网。但新的机器却获取不了 IP，后来发现原来能正常上网的机器，只要重新获取IP，就都不正</description>
+    </item>
+    
+    <item>
       <title>OpenGPT和近期的一些思考</title>
       <link>http://localhost:1313/post/openai/</link>
       <pubDate>Wed, 29 Mar 2023 09:41:28 +0800</pubDate>
