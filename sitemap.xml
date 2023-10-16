@@ -9,21 +9,49 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/net/</loc>
-    <lastmod>2023-07-19T18:55:09+08:00</lastmod>
+    <loc>http://localhost:1313/tags/deb/</loc>
+    <lastmod>2023-10-07T12:51:11+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/linux/</loc>
+    <lastmod>2023-10-07T12:51:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2023-07-19T18:55:09+08:00</lastmod>
+    <lastmod>2023-10-07T12:51:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2023-10-07T12:51:11+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/ubuntu/</loc>
+    <lastmod>2023-10-07T12:51:11+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/find-deb/</loc>
+    <lastmod>2023-10-07T12:51:11+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/net/</loc>
     <lastmod>2023-07-19T18:55:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -66,13 +94,6 @@
   
   <url>
     <loc>http://localhost:1313/tags/bios/</loc>
-    <lastmod>2023-03-09T08:35:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/linux/</loc>
     <lastmod>2023-03-09T08:35:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -214,13 +235,6 @@
   <url>
     <loc>http://localhost:1313/post/principles1/</loc>
     <lastmod>2020-05-01T19:39:41+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/deb/</loc>
-    <lastmod>2020-04-30T15:18:07+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

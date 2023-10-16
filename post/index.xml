@@ -6,10 +6,19 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 19 Jul 2023 18:55:09 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 07 Oct 2023 12:51:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>有趣但对别人无用的需求：查找已经安装的无再依赖的deb包</title>
+      <link>http://localhost:1313/post/find-deb/</link>
+      <pubDate>Sat, 07 Oct 2023 12:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/find-deb/</guid>
+      <description>工作过程中，有一个不常见的需求，所以我在网上也没有找到直接的解决方案。需求是在 Ubuntu 中，找到已经安装的 deb 包，这些包是没有依赖其它已经安装的包的。</description>
+    </item>
     
     <item>
       <title>记一次内网Windows不能获取IP的故障</title>
