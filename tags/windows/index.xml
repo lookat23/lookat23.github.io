@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Windows on hao的博客</title>
+    <title>windows on hao的博客</title>
     <link>http://localhost:1313/tags/windows/</link>
-    <description>Recent content in Windows on hao的博客</description>
+    <description>Recent content in windows on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 31 Dec 2022 15:56:15 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Oct 2023 12:47:47 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>解决电脑时不时卡死</title>
+      <link>http://localhost:1313/post/computer-slow/</link>
+      <pubDate>Mon, 16 Oct 2023 12:47:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/computer-slow/</guid>
+      <description>近段时间电脑经常出现卡死几十秒的情况，以前也有这个问题，但以前不像现在这么严重。这段时间经常卡，特别是文件管理器有关的操作时，很容易就会出现</description>
+    </item>
     
     <item>
       <title>使用vmware和windbg调试Windows7</title>

@@ -6,10 +6,19 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 07 Oct 2023 12:51:11 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Oct 2023 12:47:47 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>解决电脑时不时卡死</title>
+      <link>http://localhost:1313/post/computer-slow/</link>
+      <pubDate>Mon, 16 Oct 2023 12:47:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/computer-slow/</guid>
+      <description>近段时间电脑经常出现卡死几十秒的情况，以前也有这个问题，但以前不像现在这么严重。这段时间经常卡，特别是文件管理器有关的操作时，很容易就会出现</description>
+    </item>
     
     <item>
       <title>有趣但对别人无用的需求：查找已经安装的无再依赖的deb包</title>
