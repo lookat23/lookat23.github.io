@@ -6,10 +6,19 @@
     <description>Recent content in Posts on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 16 Oct 2023 12:47:47 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2024 08:20:25 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>昨天的一些感想</title>
+      <link>http://localhost:1313/post/think1/</link>
+      <pubDate>Wed, 03 Jul 2024 08:20:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/think1/</guid>
+      <description>昨天中午看到两个视频，有些感想，感觉很有意思，就想写篇博客记录一下，视频分别是： Andreas Kling 的 Ladybird 最新情况 baobaopearly 对日本的一些感想 Andreas Kling 的 Ladybird 最新情况 一直都觉得</description>
+    </item>
     
     <item>
       <title>解决电脑时不时卡死</title>
