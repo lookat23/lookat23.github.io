@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在WSL2上运行SerenityOS - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="为什么要在WSL2上玩SerenityOS 我之前是在我一台 Ubuntu20.04 上的开发机上编译 SerenityOS 的。不过想好好玩一下 SerenityOS 还是想直接在自己的笔记本上编译。 但我的笔" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/serenityos-1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="在WSL2上运行SerenityOS" />
+<meta property="og:description" content="为什么要在WSL2上玩SerenityOS 我之前是在我一台 Ubuntu20.04 上的开发机上编译 SerenityOS 的。不过想好好玩一下 SerenityOS 还是想直接在自己的笔记本上编译。 但我的笔" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/serenityos-1/" />
+<meta property="article:published_time" content="2025-04-06T06:36:41+08:00" />
+<meta property="article:modified_time" content="2025-04-06T06:36:41+08:00" />
+<meta itemprop="name" content="在WSL2上运行SerenityOS">
+<meta itemprop="description" content="为什么要在WSL2上玩SerenityOS 我之前是在我一台 Ubuntu20.04 上的开发机上编译 SerenityOS 的。不过想好好玩一下 SerenityOS 还是想直接在自己的笔记本上编译。 但我的笔">
+<meta itemprop="datePublished" content="2025-04-06T06:36:41&#43;08:00" />
+<meta itemprop="dateModified" content="2025-04-06T06:36:41&#43;08:00" />
+<meta itemprop="wordCount" content="958">
+
+
+
+<meta itemprop="keywords" content="SerenityOS,WSL2," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在WSL2上运行SerenityOS"/>
+<meta name="twitter:description" content="为什么要在WSL2上玩SerenityOS 我之前是在我一台 Ubuntu20.04 上的开发机上编译 SerenityOS 的。不过想好好玩一下 SerenityOS 还是想直接在自己的笔记本上编译。 但我的笔"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在WSL2上运行SerenityOS</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-04-06 </span>
+        
+          <span class="more-meta"> 约 958 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#为什么要在wsl2上玩serenityos">为什么要在WSL2上玩SerenityOS</a></li>
+        <li><a href="#wsl2运行linux">WSL2运行Linux</a>
+          <ul>
+            <li><a href="#运行ubuntu">运行Ubuntu</a></li>
+            <li><a href="#把ubuntu系统迁移到其它位置存储">把Ubuntu系统迁移到其它位置存储</a></li>
+          </ul>
+        </li>
+        <li><a href="#安装依赖">安装依赖</a></li>
+        <li><a href="#编译-serenityos">编译 SerenityOS</a></li>
+        <li><a href="#运行-serenityos">运行 SerenityOS</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="为什么要在wsl2上玩serenityos">为什么要在WSL2上玩SerenityOS</h2>
+<p>我之前是在我一台 Ubuntu20.04 上的开发机上编译 SerenityOS 的。不过想好好玩一下 SerenityOS 还是想直接在自己的笔记本上编译。
+但我的笔记本是 Windows11，直接编译不行，要通过 WSL2 来跑一个Linux来编译。</p>
+<p>这是官网写的教程<a href="https://github.com/SerenityOS/serenity/blob/master/Documentation/BuildInstructionsWindows.md">链接</a>。
+跟着教程做能解决大部分问题。不过我其中还是遇到一些疑问和问题。趁着还记得，在这里进行一下安装过程的记录。</p>
+<h2 id="wsl2运行linux">WSL2运行Linux</h2>
+<h3 id="运行ubuntu">运行Ubuntu</h3>
+<p>SerenityOS 支持在 WSL2 进行编译运行。在我的 WIndows11 笔记本上，安装 WSL2 也很简单。</p>
+<ul>
+<li>打开控制台运行 WSL 并指定为版本2</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl --install
+wsl --set-default-version <span class="m">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查看可用版本并安装</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl --list --all
+</code></pre></td></tr></table>
+</div>
+</div><p>或</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl -l -a
+</code></pre></td></tr></table>
+</div>
+</div><p>安装并运行，这里我安装最新 Ubuntu-24.04</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl --install -d Ubuntu
+</code></pre></td></tr></table>
+</div>
+</div><p>这样应该就可以运行器一个 WSL2 的 Ubuntu 系统</p>
+<h3 id="把ubuntu系统迁移到其它位置存储">把Ubuntu系统迁移到其它位置存储</h3>
+<p>默认 WSL2 放在C盘，虽然我为C分配了足够大的空间。但 Windows 系统的C盘容量，永远都让我焦虑，所以我
+尽量不把不可控大小的文件放在C盘:)。</p>
+<ul>
+<li>先停止 WSL</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl --shutdown
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>导出当前系统</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl --export Ubuntu C:<span class="se">\b</span>ackup<span class="se">\u</span>buntu.tar
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>取消注册当前的发行版</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl --unregister Ubuntu
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>把系统放到其它地方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl --import Ubuntu D:<span class="se">\W</span>SL C:<span class="se">\b</span>ackup<span class="se">\u</span>buntu.tar
+</code></pre></td></tr></table>
+</div>
+</div><p>现在可以把 tar 删除了。</p>
+<ul>
+<li>运行虚机</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wsl -d Ubuntu
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="安装依赖">安装依赖</h2>
+<p>安装依赖和普通的 Linux 一样，主要是要注意使用 Linux 版本最好和官方教程中的一样。
+这样可以避免很多问题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt update
+sudo apt install build-essential cmake curl libmpfr-dev libmpc-dev libgmp-dev e2fsprogs ninja-build qemu-system-gui qemu-system-x86 qemu-utils ccache rsync unzip texinfo libssl-dev
+sudo apt install gcc-13 g++-13
+sudo apt install libgtk-3-dev libpixman-1-dev libsdl2-dev libslirp-dev libspice-server-dev
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="编译-serenityos">编译 SerenityOS</h2>
+<ul>
+<li>下载代码</li>
+</ul>
+<p>尽量把文件放在Linux系统中，而不要放在 Windows 系统中，通过特定路径在 Linux上 访问。因为文档说这样读写文件会很慢。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">git clone https://github.com/SerenityOS/serenity.git
+<span class="nb">cd</span> serenity
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>编译工具链</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Meta/serenity.sh rebuild-toolchain
+</code></pre></td></tr></table>
+</div>
+</div><p>这里碰到一个问题，就是编译中会从<code>https://web.archive.org/web/99991231235959id_</code>这个地址去下载一些源码。
+这是美国的数字档案馆的网址，我原来挂日本的梯子居然访问不了，很神奇，换了美国的梯子就正常了。</p>
+<ul>
+<li>编译SerenityOS</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Meta/serenity.sh build
+</code></pre></td></tr></table>
+</div>
+</div><p>编译比较耗时，但如果依赖都正常，应该编译没什么问题。</p>
+<h2 id="运行-serenityos">运行 SerenityOS</h2>
+<p>如果直接用X来转发界面，用 Linux 的 qemu 做存软件模拟，会非常的慢。可以借助 Windows 的 HyperV 技术来做模拟。
+需要安装 Windows 版本的 qemu<a href="https://qemu.weilnetz.de/w64/">下载地址</a></p>
+<p>这里很神奇，我开头以为是在 Linux 中编译，然后把编译出来的镜像，用 Windows 的 qemu 选择这个镜像来运行。
+但直接在 Linux 中执行<code>Meta/serenity.sh run</code>就会自动打开 Windows 的 qemu 来运行，很神奇。暂时不知是怎样做到的。</p>
+<p>最后运行成功，可以在自己的笔记本上探索SerenityOS了。
+<img src="1.jpg" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2025-04-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/serenityos/">SerenityOS</a>
+          <a href="/tags/wsl2/">WSL2</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/think1/">
+            <span class="next-text nav-default">昨天的一些感想</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2025
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

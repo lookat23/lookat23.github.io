@@ -6,10 +6,28 @@
     <description>Recent content in Tags on hao的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Jul 2024 08:20:25 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 06 Apr 2025 06:36:41 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SerenityOS</title>
+      <link>http://localhost:1313/tags/serenityos/</link>
+      <pubDate>Sun, 06 Apr 2025 06:36:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/serenityos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WSL2</title>
+      <link>http://localhost:1313/tags/wsl2/</link>
+      <pubDate>Sun, 06 Apr 2025 06:36:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/wsl2/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>思考</title>

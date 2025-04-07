@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>在WSL2上运行SerenityOS</title>
+      <link>http://localhost:1313/post/serenityos-1/</link>
+      <pubDate>Sun, 06 Apr 2025 06:36:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/serenityos-1/</guid>
+      <description>为什么要在WSL2上玩SerenityOS 我之前是在我一台 Ubuntu20.04 上的开发机上编译 SerenityOS 的。不过想好好玩一下 SerenityOS 还是想直接在自己的笔记本上编译。 但我的笔</description>
+    </item>
+    
+    <item>
       <title>昨天的一些感想</title>
       <link>http://localhost:1313/post/think1/</link>
       <pubDate>Wed, 03 Jul 2024 08:20:25 +0800</pubDate>

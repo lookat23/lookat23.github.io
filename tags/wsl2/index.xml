@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WSL2 on hao的博客</title>
+    <link>http://localhost:1313/tags/wsl2/</link>
+    <description>Recent content in WSL2 on hao的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 06 Apr 2025 06:36:41 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/wsl2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在WSL2上运行SerenityOS</title>
+      <link>http://localhost:1313/post/serenityos-1/</link>
+      <pubDate>Sun, 06 Apr 2025 06:36:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/serenityos-1/</guid>
+      <description>为什么要在WSL2上玩SerenityOS 我之前是在我一台 Ubuntu20.04 上的开发机上编译 SerenityOS 的。不过想好好玩一下 SerenityOS 还是想直接在自己的笔记本上编译。 但我的笔</description>
+    </item>
+    
+  </channel>
+</rss>
