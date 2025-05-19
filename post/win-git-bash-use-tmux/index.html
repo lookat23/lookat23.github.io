@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Windows下Git Bash 使用Tmux - hao的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hao" /><meta name="description" content="为何要这样做？ 用惯了Linux，习惯用各种find、grep等命令来完成任务，再去使用Windows的终端实在太难受了。尤其是它的 Tab 逻辑是直" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/win-git-bash-use-tmux/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Windows下Git Bash 使用Tmux" />
+<meta property="og:description" content="为何要这样做？ 用惯了Linux，习惯用各种find、grep等命令来完成任务，再去使用Windows的终端实在太难受了。尤其是它的 Tab 逻辑是直" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/win-git-bash-use-tmux/" />
+<meta property="article:published_time" content="2025-05-19T22:19:48+08:00" />
+<meta property="article:modified_time" content="2025-05-19T22:19:48+08:00" />
+<meta itemprop="name" content="Windows下Git Bash 使用Tmux">
+<meta itemprop="description" content="为何要这样做？ 用惯了Linux，习惯用各种find、grep等命令来完成任务，再去使用Windows的终端实在太难受了。尤其是它的 Tab 逻辑是直">
+<meta itemprop="datePublished" content="2025-05-19T22:19:48&#43;08:00" />
+<meta itemprop="dateModified" content="2025-05-19T22:19:48&#43;08:00" />
+<meta itemprop="wordCount" content="568">
+
+
+
+<meta itemprop="keywords" content="Windows,Tmux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Windows下Git Bash 使用Tmux"/>
+<meta name="twitter:description" content="为何要这样做？ 用惯了Linux，习惯用各种find、grep等命令来完成任务，再去使用Windows的终端实在太难受了。尤其是它的 Tab 逻辑是直"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">hao的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">hao的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Windows下Git Bash 使用Tmux</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-05-19 </span>
+        
+          <span class="more-meta"> 约 568 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为何要这样做">为何要这样做？</a></li>
+    <li><a href="#操作">操作</a></li>
+    <li><a href="#其他问题">其他问题</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="为何要这样做">为何要这样做？</h1>
+<p>用惯了Linux，习惯用各种find、grep等命令来完成任务，再去使用Windows的终端实在太难受了。尤其是它的 Tab 逻辑是直接选一个文件，而不是把可能的选项列出，用起来非常不好用。因为我的Windows装了 Git，所以可以使用 Git 的 Bash 。虽然这个终端反应有点慢，但起码能用得顺手。而在用 Linux 时，我还喜欢使用 Tmux 来运行多个窗口。</p>
+<p>默认 Git Bash 并没有 Tmux，网上找到的方法是去下载 MYSYS2 的发行版，然后在发行版中通过命令安装 Tmux。再从目录中把 Tmux.exe 和相关 dll 拷贝到 Git Bash 的办法来安装 Tmux。感觉略显麻烦，下面说一下我的办法。</p>
+<h1 id="操作">操作</h1>
+<blockquote>
+<p>下面说到文件版本，可能会在不同时期可能版本后会有所差异，找不到下面的版本，就用同名最新的就好</p>
+</blockquote>
+<p>打开网页 <a href="https://repo.msys2.org/msys/x86_64/">https://repo.msys2.org/msys/x86_64/</a>，下载 <strong>tmux-3.3.a-1-x86_64.pkg.tar.zst</strong> 和 <strong>libevent-2.1.12-4-x86_64.pkg.tar.zst</strong>。然后分别把包中的<strong>tmux.exe</strong> 和 <strong>msys-event_core-2-1-7.dll</strong> 拷贝到 Git Bash 的 bin 目录。我的路径是 <strong>C:\Program Files\Git\usr\bin</strong>。这样在 Git Bash 上运行 Tmux 了
+<img src="screenshot.jpg" alt=""></p>
+<h1 id="其他问题">其他问题</h1>
+<p>刚开始使用时，进入 Tmux 后可能使用 clear 命令会出现如下提示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ clear
+&#39;tmux-256color&#39;: unknown terminal type.
+
+</code></pre></td></tr></table>
+</div>
+</div><p>这个问题只需正确设置环境变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 不创建.profile会报错，所以这里也进行创建
+touch ~/.profile
+echo &#39;export TERM=xterm-256color&#39; &gt;&gt; ~/.bashrc
+</code></pre></td></tr></table>
+</div>
+</div><p>完成后激活一下，或者重新在 Tmux 中打开 Shell，现在 clear 就不会报错了</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hao</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2025-05-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/windows/">Windows</a>
+          <a href="/tags/tmux/">Tmux</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/serenityos-1/">
+            <span class="next-text nav-default">在WSL2上运行SerenityOS</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:149117725@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/hao_ye__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/lookat23" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2025
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hao</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

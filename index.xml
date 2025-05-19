@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Windows下Git Bash 使用Tmux</title>
+      <link>http://localhost:1313/post/win-git-bash-use-tmux/</link>
+      <pubDate>Mon, 19 May 2025 22:19:48 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/win-git-bash-use-tmux/</guid>
+      <description>为何要这样做？ 用惯了Linux，习惯用各种find、grep等命令来完成任务，再去使用Windows的终端实在太难受了。尤其是它的 Tab 逻辑是直</description>
+    </item>
+    
+    <item>
       <title>在WSL2上运行SerenityOS</title>
       <link>http://localhost:1313/post/serenityos-1/</link>
       <pubDate>Sun, 06 Apr 2025 06:36:41 +0800</pubDate>

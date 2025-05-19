@@ -10,20 +10,41 @@
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2025-04-06T06:36:41+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/serenityos/</loc>
-    <lastmod>2025-04-06T06:36:41+08:00</lastmod>
+    <lastmod>2025-05-19T22:19:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-05-19T22:19:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/tmux/</loc>
+    <lastmod>2025-05-19T22:19:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/windows/</loc>
+    <lastmod>2025-05-19T22:19:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/win-git-bash-use-tmux/</loc>
+    <lastmod>2025-05-19T22:19:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/serenityos/</loc>
     <lastmod>2025-04-06T06:36:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -53,13 +74,6 @@
   <url>
     <loc>http://localhost:1313/post/think1/</loc>
     <lastmod>2024-07-03T08:20:25+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/windows/</loc>
-    <lastmod>2023-10-16T12:47:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
